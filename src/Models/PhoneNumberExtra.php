@@ -17,12 +17,12 @@ namespace HaakCo\LocationManager\Models;
  * @property int $phone_number_id
  * @property array $data_json
  * @property \HaakCo\LocationManager\Models\PhoneNumber $phone_number
- * @package App\Models
+ * @package HaakCo\LocationManager\Models
  * @mixin IdeHelperPhoneNumberExtra
  */
-class PhoneNumberExtra extends \HaakCo\LocationManager\Models\BaseModels\BaseModel
+class PhoneNumberExtra extends \HaakCo\PostgresHelper\Models\BaseModels\BaseModel
 {
-    protected $table = 'public.phone_number_extra';
+    protected $table = 'phone_number_extra';
 
     protected $casts = [
         'phone_number_id' => 'int',

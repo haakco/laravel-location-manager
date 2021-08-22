@@ -19,16 +19,16 @@ namespace HaakCo\LocationManager\Models;
  * @property int $email_id
  * @property \HaakCo\LocationManager\Models\Address $address
  * @property \HaakCo\LocationManager\Models\Email $email
- * @package App\Models
+ * @package HaakCo\LocationManager\Models
  * @mixin IdeHelperAddressEmail
  */
-class AddressEmail extends \HaakCo\LocationManager\Models\BaseModels\BaseModel
+class AddressEmail extends \HaakCo\PostgresHelper\Models\BaseModels\BaseModel
 {
     use \Illuminate\Database\Eloquent\SoftDeletes;
 
 
 
-    protected $table = 'public.address_emails';
+    protected $table = 'address_emails';
 
     protected $casts = [
         'address_id' => 'int',

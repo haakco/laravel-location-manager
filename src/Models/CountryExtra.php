@@ -17,12 +17,12 @@ namespace HaakCo\LocationManager\Models;
  * @property int $country_id
  * @property string $json_data
  * @property \HaakCo\LocationManager\Models\Country $country
- * @package App\Models
+ * @package HaakCo\LocationManager\Models
  * @mixin IdeHelperCountryExtra
  */
-class CountryExtra extends \HaakCo\LocationManager\Models\BaseModels\BaseModel
+class CountryExtra extends \HaakCo\PostgresHelper\Models\BaseModels\BaseModel
 {
-    protected $table = 'public.country_extra';
+    protected $table = 'country_extra';
 
     protected $casts = [
         'country_id' => 'int'

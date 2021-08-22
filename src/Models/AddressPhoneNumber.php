@@ -6,7 +6,8 @@
 
 namespace HaakCo\LocationManager\Models;
 
-
+use HaakCo\PostgresHelper\Models\BaseModels\BaseModel;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class AddressPhoneNumber
@@ -17,18 +18,16 @@ namespace HaakCo\LocationManager\Models;
  * @property string $deleted_at
  * @property int $address_id
  * @property int $user_phone_id
- * @property \HaakCo\LocationManager\Models\Address $address
- * @property \HaakCo\LocationManager\Models\UserPhoneNumber $user_phone
- * @package App\Models
- * @mixin IdeHelperAddressPhoneNumber
+ * @property Address $address
+ * @package HaakCo\LocationManager\Models
  */
-class AddressPhoneNumber extends \HaakCo\LocationManager\Models\BaseModels\BaseModel
+class AddressPhoneNumber extends BaseModel
 {
-    use \Illuminate\Database\Eloquent\SoftDeletes;
+    use SoftDeletes;
 
 
 
-    protected $table = 'public.address_phone_numbers';
+    protected $table = 'address_phone_numbers';
 
     protected $casts = [
         'address_id' => 'int',
@@ -42,11 +41,6 @@ class AddressPhoneNumber extends \HaakCo\LocationManager\Models\BaseModels\BaseM
 
     public function address()
     {
-        return $this->belongsTo(\HaakCo\LocationManager\Models\Address::class, 'address_id');
-    }
-
-    public function user_phone()
-    {
-        return $this->belongsTo(\HaakCo\LocationManager\Models\UserPhoneNumber::class, 'user_phone_id');
+        return $this->belongsTo(Address::class, 'address_id');
     }
 }

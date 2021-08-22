@@ -6,14 +6,18 @@
 
 namespace HaakCo\LocationManager\Models;
 
-
+use Carbon\Carbon;
+use HaakCo\PostgresHelper\Models\BaseModels\BaseModel;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\User;
 
 /**
  * Class Country
  *
  * @property int $id
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
  * @property string $deleted_at
  * @property int $continent_id
  * @property boolean $is_active
@@ -29,33 +33,26 @@ namespace HaakCo\LocationManager\Models;
  * @property float $latitude_min
  * @property float $longitude_max
  * @property float $longitude_min
- * @property \HaakCo\LocationManager\Models\Continent $continent
- * @property \Illuminate\Database\Eloquent\Collection|\HaakCo\LocationManager\Models\PhoneNumber[] $phone_numbers_country
- * @property \Illuminate\Database\Eloquent\Collection|\HaakCo\LocationManager\Models\MonitorServer[] $monitor_servers_country
- * @property \Illuminate\Database\Eloquent\Collection|\HaakCo\LocationManager\Models\UserAttributeDropdown[] $user_attribute_dropdowns_country
- * @property \Illuminate\Database\Eloquent\Collection|\HaakCo\LocationManager\Models\UserAttributeDropdown[] $user_attribute_dropdowns_attribute_dropdown_option
- * @property \Illuminate\Database\Eloquent\Collection|\HaakCo\LocationManager\Models\User[] $users
- * @property \Illuminate\Database\Eloquent\Collection|\HaakCo\LocationManager\Models\UserCountry[] $user_countries_country
- * @property \Illuminate\Database\Eloquent\Collection|\HaakCo\LocationManager\Models\County[] $counties_country
- * @property \Illuminate\Database\Eloquent\Collection|\HaakCo\LocationManager\Models\City[] $cities_country
- * @property \Illuminate\Database\Eloquent\Collection|\HaakCo\LocationManager\Models\CountryCurrency[] $country_currencies_country
- * @property \Illuminate\Database\Eloquent\Collection|\HaakCo\LocationManager\Models\Address[] $addresses_country
- * @property \Illuminate\Database\Eloquent\Collection|\HaakCo\LocationManager\Models\CountryExtra[] $country_extras_country
- * @property \Illuminate\Database\Eloquent\Collection|\HaakCo\LocationManager\Models\Language[] $languages
- * @property \Illuminate\Database\Eloquent\Collection|\HaakCo\LocationManager\Models\CountryLanguage[] $country_languages_country
- * @property \Illuminate\Database\Eloquent\Collection|\HaakCo\LocationManager\Models\CountryLanguage[] $country_languages_attribute_dropdown_option
- * @property \Illuminate\Database\Eloquent\Collection|\HaakCo\LocationManager\Models\Timezone[] $timezones
- * @property \Illuminate\Database\Eloquent\Collection|\HaakCo\LocationManager\Models\CountryTimezone[] $country_timezones_country
- * @package App\Models
- * @mixin IdeHelperCountry
+ * @property Continent $continent
+ * @property Collection|PhoneNumber[] $phone_numbers_country
+ * @property Collection|County[] $counties_country
+ * @property Collection|City[] $cities_country
+ * @property Collection|CountryCurrency[] $country_currencies_country
+ * @property Collection|Address[] $addresses_country
+ * @property Collection|CountryExtra[] $country_extras_country
+ * @property Collection|Language[] $languages
+ * @property Collection|CountryLanguage[] $country_languages_country
+ * @property Collection|CountryLanguage[] $country_languages_attribute_dropdown_option
+ * @property Collection|Timezone[] $timezones
+ * @property Collection|CountryTimezone[] $country_timezones_country
+ * @package HaakCo\LocationManager\Models
  */
-class Country extends \HaakCo\LocationManager\Models\BaseModels\BaseModel
+class Country extends BaseModel
 {
-    use \Illuminate\Database\Eloquent\SoftDeletes;
+    use SoftDeletes;
 
 
-
-    protected $table = 'public.countries';
+    protected $table = 'countries';
 
     protected $casts = [
         'continent_id' => 'int',
@@ -88,92 +85,80 @@ class Country extends \HaakCo\LocationManager\Models\BaseModels\BaseModel
 
     public function continent()
     {
-        return $this->belongsTo(\HaakCo\LocationManager\Models\Continent::class, 'continent_id');
+        return $this->belongsTo(Continent::class, 'continent_id');
     }
 
     public function phone_numbers_country()
     {
-        return $this->hasMany(\HaakCo\LocationManager\Models\PhoneNumber::class, 'country_id');
-    }
-
-    public function monitor_servers_country()
-    {
-        return $this->hasMany(\HaakCo\LocationManager\Models\MonitorServer::class, 'country_id');
-    }
-
-    public function user_attribute_dropdowns_country()
-    {
-        return $this->hasMany(\HaakCo\LocationManager\Models\UserAttributeDropdown::class, 'country_id');
-    }
-
-    public function user_attribute_dropdowns_attribute_dropdown_option()
-    {
-        return $this->hasMany(\HaakCo\LocationManager\Models\UserAttributeDropdown::class, 'attribute_dropdown_option_id');
+        return $this->hasMany(PhoneNumber::class, 'country_id');
     }
 
     public function users()
     {
-        return $this->belongsToMany(\HaakCo\LocationManager\Models\User::class, 'public.user_country', 'country_id')
-                    ->withPivot('id')
-                    ->withTimestamps();
-    }
-
-    public function user_countries_country()
-    {
-        return $this->hasMany(\HaakCo\LocationManager\Models\UserCountry::class, 'country_id');
+        return $this->belongsToMany(User::class, 'public.user_country', 'country_id')
+            ->withPivot('id')
+            ->withTimestamps();
     }
 
     public function counties_country()
     {
-        return $this->hasMany(\HaakCo\LocationManager\Models\County::class, 'country_id');
+        return $this->hasMany(County::class, 'country_id');
     }
 
     public function cities_country()
     {
-        return $this->hasMany(\HaakCo\LocationManager\Models\City::class, 'country_id');
+        return $this->hasMany(City::class, 'country_id');
     }
 
     public function country_currencies_country()
     {
-        return $this->hasMany(\HaakCo\LocationManager\Models\CountryCurrency::class, 'country_id');
+        return $this->hasMany(CountryCurrency::class, 'country_id');
     }
 
     public function addresses_country()
     {
-        return $this->hasMany(\HaakCo\LocationManager\Models\Address::class, 'country_id');
+        return $this->hasMany(Address::class, 'country_id');
     }
 
     public function country_extras_country()
     {
-        return $this->hasMany(\HaakCo\LocationManager\Models\CountryExtra::class, 'country_id');
+        return $this->hasMany(CountryExtra::class, 'country_id');
     }
 
     public function languages()
     {
-        return $this->belongsToMany(\HaakCo\LocationManager\Models\Language::class, 'public.country_languages', 'attribute_dropdown_option_id')
-                    ->withPivot('id', 'country_id')
-                    ->withTimestamps();
+        return $this->belongsToMany(
+            Language::class,
+            'public.country_languages',
+            'attribute_dropdown_option_id'
+        )
+            ->withPivot('id', 'country_id')
+            ->withTimestamps();
     }
 
     public function country_languages_country()
     {
-        return $this->hasMany(\HaakCo\LocationManager\Models\CountryLanguage::class, 'country_id');
+        return $this->hasMany(CountryLanguage::class, 'country_id');
     }
 
     public function country_languages_attribute_dropdown_option()
     {
-        return $this->hasMany(\HaakCo\LocationManager\Models\CountryLanguage::class, 'attribute_dropdown_option_id');
+        return $this->hasMany(CountryLanguage::class, 'attribute_dropdown_option_id');
     }
 
     public function timezones()
     {
-        return $this->belongsToMany(\HaakCo\LocationManager\Models\Timezone::class, 'public.country_timezones', 'country_id')
-                    ->withPivot('id')
-                    ->withTimestamps();
+        return $this->belongsToMany(
+            Timezone::class,
+            'public.country_timezones',
+            'country_id'
+        )
+            ->withPivot('id')
+            ->withTimestamps();
     }
 
     public function country_timezones_country()
     {
-        return $this->hasMany(\HaakCo\LocationManager\Models\CountryTimezone::class, 'country_id');
+        return $this->hasMany(CountryTimezone::class, 'country_id');
     }
 }

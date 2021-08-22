@@ -21,16 +21,16 @@ namespace HaakCo\LocationManager\Models;
  * @property string $local_name
  * @property \Illuminate\Database\Eloquent\Collection|\HaakCo\LocationManager\Models\Country[] $countries
  * @property \Illuminate\Database\Eloquent\Collection|\HaakCo\LocationManager\Models\CountryLanguage[] $country_languages_language
- * @package App\Models
+ * @package HaakCo\LocationManager\Models
  * @mixin IdeHelperLanguage
  */
-class Language extends \HaakCo\LocationManager\Models\BaseModels\BaseModel
+class Language extends \HaakCo\PostgresHelper\Models\BaseModels\BaseModel
 {
     use \Illuminate\Database\Eloquent\SoftDeletes;
 
 
 
-    protected $table = 'public.languages';
+    protected $table = 'languages';
 
     protected $fillable = [
         'code',

@@ -20,16 +20,16 @@ namespace HaakCo\LocationManager\Models;
  * @property \HaakCo\LocationManager\Models\Country $country
  * @property \Illuminate\Database\Eloquent\Collection|\HaakCo\LocationManager\Models\City[] $cities_county
  * @property \Illuminate\Database\Eloquent\Collection|\HaakCo\LocationManager\Models\Address[] $addresses_county
- * @package App\Models
+ * @package HaakCo\LocationManager\Models
  * @mixin IdeHelperCounty
  */
-class County extends \HaakCo\LocationManager\Models\BaseModels\BaseModel
+class County extends \HaakCo\PostgresHelper\Models\BaseModels\BaseModel
 {
     use \Illuminate\Database\Eloquent\SoftDeletes;
 
 
 
-    protected $table = 'public.counties';
+    protected $table = 'counties';
 
     protected $casts = [
         'country_id' => 'int'

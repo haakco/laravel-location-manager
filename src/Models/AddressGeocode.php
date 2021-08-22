@@ -6,24 +6,25 @@
 
 namespace HaakCo\LocationManager\Models;
 
-
+use Carbon\Carbon;
+use HaakCo\PostgresHelper\Models\BaseModels\BaseModel;
 
 /**
  * Class AddressGeocode
  *
  * @property int $id
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
  * @property int $address_id
  * @property double $latitude
  * @property double $longitude
- * @property \HaakCo\LocationManager\Models\Address $address
- * @package App\Models
+ * @property Address $address
+ * @package HaakCo\LocationManager\Models
  * @mixin IdeHelperAddressGeocode
  */
-class AddressGeocode extends \HaakCo\LocationManager\Models\BaseModels\BaseModel
+class AddressGeocode extends BaseModel
 {
-    protected $table = 'public.address_geocode';
+    protected $table = 'address_geocode';
 
     protected $casts = [
         'address_id' => 'int',
@@ -39,6 +40,6 @@ class AddressGeocode extends \HaakCo\LocationManager\Models\BaseModels\BaseModel
 
     public function address()
     {
-        return $this->belongsTo(\HaakCo\LocationManager\Models\Address::class, 'address_id');
+        return $this->belongsTo(Address::class, 'address_id');
     }
 }

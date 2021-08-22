@@ -19,12 +19,12 @@ namespace HaakCo\LocationManager\Models;
  * @property \HaakCo\LocationManager\Models\AttributeDropdownOption $country
  * @property \HaakCo\LocationManager\Models\Language $language
  * @property \HaakCo\LocationManager\Models\AttributeDropdownOption $attribute_dropdown_option
- * @package App\Models
+ * @package HaakCo\LocationManager\Models
  * @mixin IdeHelperCountryLanguage
  */
-class CountryLanguage extends \HaakCo\LocationManager\Models\BaseModels\BaseModel
+class CountryLanguage extends \HaakCo\PostgresHelper\Models\BaseModels\BaseModel
 {
-    protected $table = 'public.country_languages';
+    protected $table = 'country_languages';
 
     protected $casts = [
         'country_id' => 'int',

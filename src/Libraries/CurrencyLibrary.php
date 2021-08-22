@@ -1,6 +1,6 @@
 <?php
 
-namespace HaakCo\LocationManager\Libraries\Helper;
+namespace HaakCo\LocationManager;
 
 use  HaakCo\LocationManager\Models\Currency;
 use Illuminate\Support\Facades\Log;

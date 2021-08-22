@@ -25,16 +25,16 @@ namespace HaakCo\LocationManager\Models;
  * @property int $day_light_raw_offset_minutes
  * @property \Illuminate\Database\Eloquent\Collection|\HaakCo\LocationManager\Models\Country[] $countries
  * @property \Illuminate\Database\Eloquent\Collection|\HaakCo\LocationManager\Models\CountryTimezone[] $country_timezones_timezone
- * @package App\Models
+ * @package HaakCo\LocationManager\Models
  * @mixin IdeHelperTimezone
  */
-class Timezone extends \HaakCo\LocationManager\Models\BaseModels\BaseModel
+class Timezone extends \HaakCo\PostgresHelper\Models\BaseModels\BaseModel
 {
     use \Illuminate\Database\Eloquent\SoftDeletes;
 
 
 
-    protected $table = 'public.timezones';
+    protected $table = 'timezones';
 
     protected $casts = [
         'is_day_light_saving' => 'boolean',

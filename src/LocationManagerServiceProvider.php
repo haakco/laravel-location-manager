@@ -2,6 +2,9 @@
 
 namespace HaakCo\LocationManager;
 
+use HaakCo\LocationManager\Console\Commands\CountryAdd;
+use HaakCo\LocationManager\Console\Commands\CurrencyAdd;
+use HaakCo\LocationManager\Console\Commands\TimezoneAddAll;
 use Illuminate\Support\ServiceProvider;
 
 class LocationManagerServiceProvider extends ServiceProvider
@@ -15,38 +18,13 @@ class LocationManagerServiceProvider extends ServiceProvider
     {
         // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'haakco');
         // $this->loadViewsFrom(__DIR__.'/../resources/views', 'haakco');
-        // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
         // $this->loadRoutesFrom(__DIR__.'/routes.php');
 
         // Publishing is only necessary when using the CLI.
         if ($this->app->runningInConsole()) {
             $this->bootForConsole();
         }
-    }
-
-    /**
-     * Register any package services.
-     *
-     * @return void
-     */
-    public function register(): void
-    {
-        $this->mergeConfigFrom(__DIR__.'/../config/locationmanager.php', 'locationmanager');
-
-        // Register the service the package provides.
-        $this->app->singleton('locationmanager', function ($app) {
-            return new LocationManager;
-        });
-    }
-
-    /**
-     * Get the services provided by the provider.
-     *
-     * @return array
-     */
-    public function provides()
-    {
-        return ['locationmanager'];
     }
 
     /**
@@ -58,8 +36,8 @@ class LocationManagerServiceProvider extends ServiceProvider
     {
         // Publishing the configuration file.
         $this->publishes([
-            __DIR__.'/../config/locationmanager.php' => config_path('locationmanager.php'),
-        ], 'locationmanager.config');
+                             __DIR__ . '/../config/locationmanager.php' => config_path('locationmanager.php'),
+                         ], 'locationmanager.config');
 
         // Publishing the views.
         /*$this->publishes([
@@ -77,6 +55,37 @@ class LocationManagerServiceProvider extends ServiceProvider
         ], 'locationmanager.views');*/
 
         // Registering package commands.
-        // $this->commands([]);
+        $this->commands(
+            [
+                CountryAdd::class,
+                CurrencyAdd::class,
+                TimezoneAddAll::class,
+            ]
+        );
+    }
+
+    /**
+     * Register any package services.
+     *
+     * @return void
+     */
+    public function register(): void
+    {
+        $this->mergeConfigFrom(__DIR__ . '/../config/locationmanager.php', 'locationmanager');
+
+        // Register the service the package provides.
+        $this->app->singleton('locationmanager', function ($app) {
+            return new LocationManager;
+        });
+    }
+
+    /**
+     * Get the services provided by the provider.
+     *
+     * @return array
+     */
+    public function provides()
+    {
+        return ['locationmanager'];
     }
 }

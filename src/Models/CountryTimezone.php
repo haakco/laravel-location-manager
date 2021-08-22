@@ -18,12 +18,12 @@ namespace HaakCo\LocationManager\Models;
  * @property int $timezone_id
  * @property \HaakCo\LocationManager\Models\Country $country
  * @property \HaakCo\LocationManager\Models\Timezone $timezone
- * @package App\Models
+ * @package HaakCo\LocationManager\Models
  * @mixin IdeHelperCountryTimezone
  */
-class CountryTimezone extends \HaakCo\LocationManager\Models\BaseModels\BaseModel
+class CountryTimezone extends \HaakCo\PostgresHelper\Models\BaseModels\BaseModel
 {
-    protected $table = 'public.country_timezones';
+    protected $table = 'country_timezones';
 
     protected $casts = [
         'country_id' => 'int',

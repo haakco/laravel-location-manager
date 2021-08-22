@@ -18,12 +18,12 @@ namespace HaakCo\LocationManager\Models;
  * @property int $currency_id
  * @property \HaakCo\LocationManager\Models\Country $country
  * @property \HaakCo\LocationManager\Models\Currency $currency
- * @package App\Models
+ * @package HaakCo\LocationManager\Models
  * @mixin IdeHelperCountryCurrency
  */
-class CountryCurrency extends \HaakCo\LocationManager\Models\BaseModels\BaseModel
+class CountryCurrency extends \HaakCo\PostgresHelper\Models\BaseModels\BaseModel
 {
-    protected $table = 'public.country_currencies';
+    protected $table = 'country_currencies';
 
     protected $casts = [
         'country_id' => 'int',

@@ -6,14 +6,18 @@
 
 namespace HaakCo\LocationManager\Models;
 
-
+use Carbon\Carbon;
+use HaakCo\PostgresHelper\Models\BaseModels\BaseModel;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\User;
 
 /**
  * Class Address
  *
  * @property int $id
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
  * @property string $deleted_at
  * @property int $user_id
  * @property int $address_type_id
@@ -28,26 +32,25 @@ namespace HaakCo\LocationManager\Models;
  * @property string $complex_number
  * @property string $city_area
  * @property string $postal_code
- * @property \HaakCo\LocationManager\Models\User $user
- * @property \HaakCo\LocationManager\Models\AddressType $address_type
- * @property \HaakCo\LocationManager\Models\Country $country
- * @property \HaakCo\LocationManager\Models\County $county
- * @property \HaakCo\LocationManager\Models\City $city
- * @property \Illuminate\Database\Eloquent\Collection|\HaakCo\LocationManager\Models\AddressGeocode[] $address_geocodes_address
- * @property \Illuminate\Database\Eloquent\Collection|\HaakCo\LocationManager\Models\AddressPhoneNumber[] $address_phone_numbers_address
- * @property \Illuminate\Database\Eloquent\Collection|\HaakCo\LocationManager\Models\AddressExtra[] $address_extras_address
- * @property \Illuminate\Database\Eloquent\Collection|\HaakCo\LocationManager\Models\Email[] $emails
- * @property \Illuminate\Database\Eloquent\Collection|\HaakCo\LocationManager\Models\AddressEmail[] $address_emails_address
- * @package App\Models
- * @mixin IdeHelperAddress
+ * @property User $user
+ * @property AddressType $address_type
+ * @property Country $country
+ * @property County $county
+ * @property City $city
+ * @property Collection|AddressGeocode[] $address_geocodes_address
+ * @property Collection|AddressPhoneNumber[] $address_phone_numbers_address
+ * @property Collection|AddressExtra[] $address_extras_address
+ * @property Collection|\HaakCo\LocationManager\Models\Email[] $emails
+ * @property Collection|AddressEmail[] $address_emails_address
+ * @package HaakCo\LocationManager\Models
  */
-class Address extends \HaakCo\LocationManager\Models\BaseModels\BaseModel
+class Address extends BaseModel
 {
-    use \Illuminate\Database\Eloquent\SoftDeletes;
+    use SoftDeletes;
 
 
 
-    protected $table = 'public.addresses';
+    protected $table = 'addresses';
 
     protected $casts = [
         'user_id' => 'int',
@@ -75,42 +78,42 @@ class Address extends \HaakCo\LocationManager\Models\BaseModels\BaseModel
 
     public function user()
     {
-        return $this->belongsTo(\HaakCo\LocationManager\Models\User::class, 'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function address_type()
     {
-        return $this->belongsTo(\HaakCo\LocationManager\Models\AddressType::class, 'address_type_id');
+        return $this->belongsTo(AddressType::class, 'address_type_id');
     }
 
     public function country()
     {
-        return $this->belongsTo(\HaakCo\LocationManager\Models\Country::class, 'country_id');
+        return $this->belongsTo(Country::class, 'country_id');
     }
 
     public function county()
     {
-        return $this->belongsTo(\HaakCo\LocationManager\Models\County::class, 'county_id');
+        return $this->belongsTo(County::class, 'county_id');
     }
 
     public function city()
     {
-        return $this->belongsTo(\HaakCo\LocationManager\Models\City::class, 'city_id');
+        return $this->belongsTo(City::class, 'city_id');
     }
 
     public function address_geocodes_address()
     {
-        return $this->hasMany(\HaakCo\LocationManager\Models\AddressGeocode::class, 'address_id');
+        return $this->hasMany(AddressGeocode::class, 'address_id');
     }
 
     public function address_phone_numbers_address()
     {
-        return $this->hasMany(\HaakCo\LocationManager\Models\AddressPhoneNumber::class, 'address_id');
+        return $this->hasMany(AddressPhoneNumber::class, 'address_id');
     }
 
     public function address_extras_address()
     {
-        return $this->hasMany(\HaakCo\LocationManager\Models\AddressExtra::class, 'address_id');
+        return $this->hasMany(AddressExtra::class, 'address_id');
     }
 
     public function emails()
@@ -122,6 +125,6 @@ class Address extends \HaakCo\LocationManager\Models\BaseModels\BaseModel
 
     public function address_emails_address()
     {
-        return $this->hasMany(\HaakCo\LocationManager\Models\AddressEmail::class, 'address_id');
+        return $this->hasMany(AddressEmail::class, 'address_id');
     }
 }

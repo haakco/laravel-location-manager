@@ -26,12 +26,12 @@ namespace HaakCo\LocationManager\Models;
  * @property string $smallest_value_text
  * @property int $decimal_places
  * @property \Illuminate\Database\Eloquent\Collection|\HaakCo\LocationManager\Models\CountryCurrency[] $country_currencies_currency
- * @package App\Models
+ * @package HaakCo\LocationManager\Models
  * @mixin IdeHelperCurrency
  */
-class Currency extends \HaakCo\LocationManager\Models\BaseModels\BaseModel
+class Currency extends \HaakCo\PostgresHelper\Models\BaseModels\BaseModel
 {
-    protected $table = 'public.currencies';
+    protected $table = 'currencies';
 
     protected $casts = [
         'numeric_code' => 'int',

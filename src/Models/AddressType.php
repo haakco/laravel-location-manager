@@ -16,12 +16,12 @@ namespace HaakCo\LocationManager\Models;
  * @property \Carbon\Carbon $updated_at
  * @property string $name
  * @property \Illuminate\Database\Eloquent\Collection|\HaakCo\LocationManager\Models\Address[] $addresses_address_type
- * @package App\Models
+ * @package HaakCo\LocationManager\Models
  * @mixin IdeHelperAddressType
  */
-class AddressType extends \HaakCo\LocationManager\Models\BaseModels\BaseModel
+class AddressType extends \HaakCo\PostgresHelper\Models\BaseModels\BaseModel
 {
-    protected $table = 'public.address_types';
+    protected $table = 'address_types';
 
     protected $fillable = [
         'name'

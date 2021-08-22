@@ -17,12 +17,12 @@ namespace HaakCo\LocationManager\Models;
  * @property int $address_id
  * @property array $data_json
  * @property \HaakCo\LocationManager\Models\Address $address
- * @package App\Models
+ * @package HaakCo\LocationManager\Models
  * @mixin IdeHelperAddressExtra
  */
-class AddressExtra extends \HaakCo\LocationManager\Models\BaseModels\BaseModel
+class AddressExtra extends \HaakCo\PostgresHelper\Models\BaseModels\BaseModel
 {
-    protected $table = 'public.address_extra';
+    protected $table = 'address_extra';
 
     protected $casts = [
         'address_id' => 'int',

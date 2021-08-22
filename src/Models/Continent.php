@@ -17,16 +17,16 @@ namespace HaakCo\LocationManager\Models;
  * @property string $deleted_at
  * @property string $name
  * @property \Illuminate\Database\Eloquent\Collection|\HaakCo\LocationManager\Models\Country[] $countries_continent
- * @package App\Models
+ * @package HaakCo\LocationManager\Models
  * @mixin IdeHelperContinent
  */
-class Continent extends \HaakCo\LocationManager\Models\BaseModels\BaseModel
+class Continent extends \HaakCo\PostgresHelper\Models\BaseModels\BaseModel
 {
     use \Illuminate\Database\Eloquent\SoftDeletes;
 
 
 
-    protected $table = 'public.continents';
+    protected $table = 'continents';
 
     protected $fillable = [
         'name'

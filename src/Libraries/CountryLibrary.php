@@ -1,6 +1,6 @@
 <?php
 
-namespace HaakCo\LocationManager\Libraries\Location;
+namespace HaakCo\LocationManager\Libraries;
 
 use  HaakCo\LocationManager\Libraries\Helper\CurrencyLibrary;
 use  HaakCo\LocationManager\Models\Continent;
