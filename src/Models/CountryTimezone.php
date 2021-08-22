@@ -4,7 +4,7 @@
  * Created by Reliese Model.
  */
 
-namespace App\Models;
+namespace HaakCo\LocationManager\Models;
 
 
 
@@ -16,12 +16,12 @@ namespace App\Models;
  * @property \Carbon\Carbon $updated_at
  * @property int $country_id
  * @property int $timezone_id
- * @property \App\Models\Country $country
- * @property \App\Models\Timezone $timezone
+ * @property \HaakCo\LocationManager\Models\Country $country
+ * @property \HaakCo\LocationManager\Models\Timezone $timezone
  * @package App\Models
  * @mixin IdeHelperCountryTimezone
  */
-class CountryTimezone extends \App\Models\BaseModels\BaseModel
+class CountryTimezone extends \HaakCo\LocationManager\Models\BaseModels\BaseModel
 {
     protected $table = 'public.country_timezones';
 
@@ -37,11 +37,11 @@ class CountryTimezone extends \App\Models\BaseModels\BaseModel
 
     public function country()
     {
-        return $this->belongsTo(\App\Models\Country::class, 'country_id');
+        return $this->belongsTo(\HaakCo\LocationManager\Models\Country::class, 'country_id');
     }
 
     public function timezone()
     {
-        return $this->belongsTo(\App\Models\Timezone::class, 'timezone_id');
+        return $this->belongsTo(\HaakCo\LocationManager\Models\Timezone::class, 'timezone_id');
     }
 }

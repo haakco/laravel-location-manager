@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Console\Commands;
+namespace HaakCo\LocationManager\Console\Commands;
 
-use App\Libraries\Helper\CurrencyLibrary;
+use  HaakCo\LocationManager\Libraries\Helper\CurrencyLibrary;
 use Exception;
 use Illuminate\Console\Command;
 

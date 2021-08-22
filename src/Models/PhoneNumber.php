@@ -4,7 +4,7 @@
  * Created by Reliese Model.
  */
 
-namespace App\Models;
+namespace HaakCo\LocationManager\Models;
 
 
 
@@ -19,14 +19,14 @@ namespace App\Models;
  * @property boolean $is_checked
  * @property boolean $is_valid
  * @property string $name
- * @property \App\Models\Country $country
- * @property \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $users
- * @property \Illuminate\Database\Eloquent\Collection|\App\Models\UserPhoneNumber[] $user_phone_numbers_phone_number
- * @property \Illuminate\Database\Eloquent\Collection|\App\Models\PhoneNumberExtra[] $phone_number_extras_phone_number
+ * @property \HaakCo\LocationManager\Models\Country $country
+ * @property \Illuminate\Database\Eloquent\Collection|\HaakCo\LocationManager\Models\User[] $users
+ * @property \Illuminate\Database\Eloquent\Collection|\HaakCo\LocationManager\Models\UserPhoneNumber[] $user_phone_numbers_phone_number
+ * @property \Illuminate\Database\Eloquent\Collection|\HaakCo\LocationManager\Models\PhoneNumberExtra[] $phone_number_extras_phone_number
  * @package App\Models
  * @mixin IdeHelperPhoneNumber
  */
-class PhoneNumber extends \App\Models\BaseModels\BaseModel
+class PhoneNumber extends \HaakCo\LocationManager\Models\BaseModels\BaseModel
 {
     protected $table = 'public.phone_numbers';
 
@@ -50,23 +50,23 @@ class PhoneNumber extends \App\Models\BaseModels\BaseModel
 
     public function country()
     {
-        return $this->belongsTo(\App\Models\Country::class, 'country_id');
+        return $this->belongsTo(\HaakCo\LocationManager\Models\Country::class, 'country_id');
     }
 
     public function users()
     {
-        return $this->belongsToMany(\App\Models\User::class, 'public.user_phone_numbers', 'phone_number_id')
+        return $this->belongsToMany(\HaakCo\LocationManager\Models\User::class, 'public.user_phone_numbers', 'phone_number_id')
                     ->withPivot('id', 'deleted_at', 'is_active')
                     ->withTimestamps();
     }
 
     public function user_phone_numbers_phone_number()
     {
-        return $this->hasMany(\App\Models\UserPhoneNumber::class, 'phone_number_id');
+        return $this->hasMany(\HaakCo\LocationManager\Models\UserPhoneNumber::class, 'phone_number_id');
     }
 
     public function phone_number_extras_phone_number()
     {
-        return $this->hasMany(\App\Models\PhoneNumberExtra::class, 'phone_number_id');
+        return $this->hasMany(\HaakCo\LocationManager\Models\PhoneNumberExtra::class, 'phone_number_id');
     }
 }

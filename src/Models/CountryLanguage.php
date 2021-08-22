@@ -4,7 +4,7 @@
  * Created by Reliese Model.
  */
 
-namespace App\Models;
+namespace HaakCo\LocationManager\Models;
 
 
 
@@ -16,13 +16,13 @@ namespace App\Models;
  * @property \Carbon\Carbon $updated_at
  * @property int $country_id
  * @property int $language_id
- * @property \App\Models\AttributeDropdownOption $country
- * @property \App\Models\Language $language
- * @property \App\Models\AttributeDropdownOption $attribute_dropdown_option
+ * @property \HaakCo\LocationManager\Models\AttributeDropdownOption $country
+ * @property \HaakCo\LocationManager\Models\Language $language
+ * @property \HaakCo\LocationManager\Models\AttributeDropdownOption $attribute_dropdown_option
  * @package App\Models
  * @mixin IdeHelperCountryLanguage
  */
-class CountryLanguage extends \App\Models\BaseModels\BaseModel
+class CountryLanguage extends \HaakCo\LocationManager\Models\BaseModels\BaseModel
 {
     protected $table = 'public.country_languages';
 
@@ -38,16 +38,16 @@ class CountryLanguage extends \App\Models\BaseModels\BaseModel
 
     public function country()
     {
-        return $this->belongsTo(\App\Models\AttributeDropdownOption::class, 'country_id');
+        return $this->belongsTo(\HaakCo\LocationManager\Models\AttributeDropdownOption::class, 'country_id');
     }
 
     public function language()
     {
-        return $this->belongsTo(\App\Models\Language::class, 'language_id');
+        return $this->belongsTo(\HaakCo\LocationManager\Models\Language::class, 'language_id');
     }
 
     public function attribute_dropdown_option()
     {
-        return $this->belongsTo(\App\Models\AttributeDropdownOption::class, 'attribute_dropdown_option_id');
+        return $this->belongsTo(\HaakCo\LocationManager\Models\AttributeDropdownOption::class, 'attribute_dropdown_option_id');
     }
 }

@@ -4,7 +4,7 @@
  * Created by Reliese Model.
  */
 
-namespace App\Models;
+namespace HaakCo\LocationManager\Models;
 
 
 
@@ -16,12 +16,12 @@ namespace App\Models;
  * @property \Carbon\Carbon $updated_at
  * @property int $country_id
  * @property int $currency_id
- * @property \App\Models\Country $country
- * @property \App\Models\Currency $currency
+ * @property \HaakCo\LocationManager\Models\Country $country
+ * @property \HaakCo\LocationManager\Models\Currency $currency
  * @package App\Models
  * @mixin IdeHelperCountryCurrency
  */
-class CountryCurrency extends \App\Models\BaseModels\BaseModel
+class CountryCurrency extends \HaakCo\LocationManager\Models\BaseModels\BaseModel
 {
     protected $table = 'public.country_currencies';
 
@@ -37,11 +37,11 @@ class CountryCurrency extends \App\Models\BaseModels\BaseModel
 
     public function country()
     {
-        return $this->belongsTo(\App\Models\Country::class, 'country_id');
+        return $this->belongsTo(\HaakCo\LocationManager\Models\Country::class, 'country_id');
     }
 
     public function currency()
     {
-        return $this->belongsTo(\App\Models\Currency::class, 'currency_id');
+        return $this->belongsTo(\HaakCo\LocationManager\Models\Currency::class, 'currency_id');
     }
 }

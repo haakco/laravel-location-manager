@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Libraries\Helper;
+namespace HaakCo\LocationManager\Libraries\Helper;
 
-use App\Models\Currency;
+use  HaakCo\LocationManager\Models\Currency;
 use Illuminate\Support\Facades\Log;
 use NumberFormatter;
 use PragmaRX\Coollection\Package\Coollection;

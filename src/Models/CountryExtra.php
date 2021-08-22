@@ -4,7 +4,7 @@
  * Created by Reliese Model.
  */
 
-namespace App\Models;
+namespace HaakCo\LocationManager\Models;
 
 
 
@@ -16,11 +16,11 @@ namespace App\Models;
  * @property \Carbon\Carbon $updated_at
  * @property int $country_id
  * @property string $json_data
- * @property \App\Models\Country $country
+ * @property \HaakCo\LocationManager\Models\Country $country
  * @package App\Models
  * @mixin IdeHelperCountryExtra
  */
-class CountryExtra extends \App\Models\BaseModels\BaseModel
+class CountryExtra extends \HaakCo\LocationManager\Models\BaseModels\BaseModel
 {
     protected $table = 'public.country_extra';
 
@@ -35,6 +35,6 @@ class CountryExtra extends \App\Models\BaseModels\BaseModel
 
     public function country()
     {
-        return $this->belongsTo(\App\Models\Country::class, 'country_id');
+        return $this->belongsTo(\HaakCo\LocationManager\Models\Country::class, 'country_id');
     }
 }

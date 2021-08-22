@@ -4,7 +4,7 @@
  * Created by Reliese Model.
  */
 
-namespace App\Models;
+namespace HaakCo\LocationManager\Models;
 
 
 
@@ -16,11 +16,11 @@ namespace App\Models;
  * @property \Carbon\Carbon $updated_at
  * @property int $address_id
  * @property array $data_json
- * @property \App\Models\Address $address
+ * @property \HaakCo\LocationManager\Models\Address $address
  * @package App\Models
  * @mixin IdeHelperAddressExtra
  */
-class AddressExtra extends \App\Models\BaseModels\BaseModel
+class AddressExtra extends \HaakCo\LocationManager\Models\BaseModels\BaseModel
 {
     protected $table = 'public.address_extra';
 
@@ -36,6 +36,6 @@ class AddressExtra extends \App\Models\BaseModels\BaseModel
 
     public function address()
     {
-        return $this->belongsTo(\App\Models\Address::class, 'address_id');
+        return $this->belongsTo(\HaakCo\LocationManager\Models\Address::class, 'address_id');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Enums;
+namespace HaakCo\LocationManager\Models\Enums;
 
 class AddressTypesEnum
 {

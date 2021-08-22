@@ -4,7 +4,7 @@
  * Created by Reliese Model.
  */
 
-namespace App\Models;
+namespace HaakCo\LocationManager\Models;
 
 
 
@@ -17,11 +17,11 @@ namespace App\Models;
  * @property int $address_id
  * @property double $latitude
  * @property double $longitude
- * @property \App\Models\Address $address
+ * @property \HaakCo\LocationManager\Models\Address $address
  * @package App\Models
  * @mixin IdeHelperAddressGeocode
  */
-class AddressGeocode extends \App\Models\BaseModels\BaseModel
+class AddressGeocode extends \HaakCo\LocationManager\Models\BaseModels\BaseModel
 {
     protected $table = 'public.address_geocode';
 
@@ -39,6 +39,6 @@ class AddressGeocode extends \App\Models\BaseModels\BaseModel
 
     public function address()
     {
-        return $this->belongsTo(\App\Models\Address::class, 'address_id');
+        return $this->belongsTo(\HaakCo\LocationManager\Models\Address::class, 'address_id');
     }
 }

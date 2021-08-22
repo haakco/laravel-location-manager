@@ -4,7 +4,7 @@
  * Created by Reliese Model.
  */
 
-namespace App\Models;
+namespace HaakCo\LocationManager\Models;
 
 
 
@@ -16,11 +16,11 @@ namespace App\Models;
  * @property \Carbon\Carbon $updated_at
  * @property int $phone_number_id
  * @property array $data_json
- * @property \App\Models\PhoneNumber $phone_number
+ * @property \HaakCo\LocationManager\Models\PhoneNumber $phone_number
  * @package App\Models
  * @mixin IdeHelperPhoneNumberExtra
  */
-class PhoneNumberExtra extends \App\Models\BaseModels\BaseModel
+class PhoneNumberExtra extends \HaakCo\LocationManager\Models\BaseModels\BaseModel
 {
     protected $table = 'public.phone_number_extra';
 
@@ -36,6 +36,6 @@ class PhoneNumberExtra extends \App\Models\BaseModels\BaseModel
 
     public function phone_number()
     {
-        return $this->belongsTo(\App\Models\PhoneNumber::class, 'phone_number_id');
+        return $this->belongsTo(\HaakCo\LocationManager\Models\PhoneNumber::class, 'phone_number_id');
     }
 }

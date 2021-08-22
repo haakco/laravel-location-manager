@@ -4,7 +4,7 @@
  * Created by Reliese Model.
  */
 
-namespace App\Models;
+namespace HaakCo\LocationManager\Models;
 
 
 
@@ -17,12 +17,12 @@ namespace App\Models;
  * @property string $deleted_at
  * @property int $address_id
  * @property int $email_id
- * @property \App\Models\Address $address
- * @property \App\Models\Email $email
+ * @property \HaakCo\LocationManager\Models\Address $address
+ * @property \HaakCo\LocationManager\Models\Email $email
  * @package App\Models
  * @mixin IdeHelperAddressEmail
  */
-class AddressEmail extends \App\Models\BaseModels\BaseModel
+class AddressEmail extends \HaakCo\LocationManager\Models\BaseModels\BaseModel
 {
     use \Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -42,11 +42,11 @@ class AddressEmail extends \App\Models\BaseModels\BaseModel
 
     public function address()
     {
-        return $this->belongsTo(\App\Models\Address::class, 'address_id');
+        return $this->belongsTo(\HaakCo\LocationManager\Models\Address::class, 'address_id');
     }
 
     public function email()
     {
-        return $this->belongsTo(\App\Models\Email::class, 'email_id');
+        return $this->belongsTo(\HaakCo\LocationManager\Models\Email::class, 'email_id');
     }
 }

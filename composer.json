@@ -1,5 +1,5 @@
 {
-  "name": "haakco/locationmanager",
+  "name": "haakco/location-manager",
   "description": ":package_description",
   "license": "proprietary",
   "authors": [
@@ -43,6 +43,12 @@
       "aliases": {
         "LocationManager": "HaakCo\\LocationManager\\Facades\\LocationManager"
       }
+    }
+  },
+  "repositories": {
+    "haakco/laravel-postgres-helper": {
+      "type": "vcs",
+      "url": "git@github.com:haakco/laravel-postgres-helper.git"
     }
   }
 }

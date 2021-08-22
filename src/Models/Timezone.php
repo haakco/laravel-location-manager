@@ -4,7 +4,7 @@
  * Created by Reliese Model.
  */
 
-namespace App\Models;
+namespace HaakCo\LocationManager\Models;
 
 
 
@@ -23,12 +23,12 @@ namespace App\Models;
  * @property string $day_light_display_name
  * @property int $day_light_raw_offset
  * @property int $day_light_raw_offset_minutes
- * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Country[] $countries
- * @property \Illuminate\Database\Eloquent\Collection|\App\Models\CountryTimezone[] $country_timezones_timezone
+ * @property \Illuminate\Database\Eloquent\Collection|\HaakCo\LocationManager\Models\Country[] $countries
+ * @property \Illuminate\Database\Eloquent\Collection|\HaakCo\LocationManager\Models\CountryTimezone[] $country_timezones_timezone
  * @package App\Models
  * @mixin IdeHelperTimezone
  */
-class Timezone extends \App\Models\BaseModels\BaseModel
+class Timezone extends \HaakCo\LocationManager\Models\BaseModels\BaseModel
 {
     use \Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -57,13 +57,13 @@ class Timezone extends \App\Models\BaseModels\BaseModel
 
     public function countries()
     {
-        return $this->belongsToMany(\App\Models\Country::class, 'public.country_timezones', 'timezone_id')
+        return $this->belongsToMany(\HaakCo\LocationManager\Models\Country::class, 'public.country_timezones', 'timezone_id')
                     ->withPivot('id')
                     ->withTimestamps();
     }
 
     public function country_timezones_timezone()
     {
-        return $this->hasMany(\App\Models\CountryTimezone::class, 'timezone_id');
+        return $this->hasMany(\HaakCo\LocationManager\Models\CountryTimezone::class, 'timezone_id');
     }
 }

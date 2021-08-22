@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Libraries\Location;
+namespace HaakCo\LocationManager\Libraries\Location;
 
-use App\Models\Timezone;
+use  HaakCo\LocationManager\Models\Timezone;
 use DateTimeZone;
 use IntlTimeZone;
 

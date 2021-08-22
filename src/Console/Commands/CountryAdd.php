@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Console\Commands;
+namespace HaakCo\LocationManager\Console\Commands;
 
-use App\Libraries\Location\CountryLibrary;
+use  HaakCo\LocationManager\Libraries\Location\CountryLibrary;
 use Illuminate\Console\Command;
 
 class CountryAdd extends Command

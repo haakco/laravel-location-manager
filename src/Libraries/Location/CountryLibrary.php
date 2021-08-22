@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Libraries\Location;
+namespace HaakCo\LocationManager\Libraries\Location;
 
-use App\Libraries\Helper\CurrencyLibrary;
-use App\Models\Continent;
-use App\Models\Country;
-use App\Models\CountryCurrency;
-use App\Models\CountryLanguage;
-use App\Models\CountryTimezone;
-use App\Models\Currency;
-use App\Models\Enums\ContinentsEnum;
-use App\Models\Language;
+use  HaakCo\LocationManager\Libraries\Helper\CurrencyLibrary;
+use  HaakCo\LocationManager\Models\Continent;
+use  HaakCo\LocationManager\Models\Country;
+use  HaakCo\LocationManager\Models\CountryCurrency;
+use  HaakCo\LocationManager\Models\CountryLanguage;
+use  HaakCo\LocationManager\Models\CountryTimezone;
+use  HaakCo\LocationManager\Models\Currency;
+use  HaakCo\LocationManager\Models\Enums\ContinentsEnum;
+use  HaakCo\LocationManager\Models\Language;
 use Illuminate\Support\Facades\Log;
 use PragmaRX\Countries\Package\Countries;
 use RuntimeException;

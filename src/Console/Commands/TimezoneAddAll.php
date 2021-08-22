@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Console\Commands;
+namespace HaakCo\LocationManager\Console\Commands;
 
-use App\Libraries\Location\TimezoneLibrary;
+use  HaakCo\LocationManager\Libraries\Location\TimezoneLibrary;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 
@@ -24,7 +24,7 @@ class TimezoneAddAll extends Command
     protected $description = 'Adds all possible timezones to db';
 
     /**
-     * @param \App\Libraries\Location\TimeZoneLibrary $timeZoneLibrary
+     * @param \HaakCo\LocationManager\Libraries\Location\TimeZoneLibrary $timeZoneLibrary
      *
      * @return int
      */

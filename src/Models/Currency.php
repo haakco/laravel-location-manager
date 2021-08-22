@@ -4,7 +4,7 @@
  * Created by Reliese Model.
  */
 
-namespace App\Models;
+namespace HaakCo\LocationManager\Models;
 
 
 
@@ -25,11 +25,11 @@ namespace App\Models;
  * @property string $minor_symbol
  * @property string $smallest_value_text
  * @property int $decimal_places
- * @property \Illuminate\Database\Eloquent\Collection|\App\Models\CountryCurrency[] $country_currencies_currency
+ * @property \Illuminate\Database\Eloquent\Collection|\HaakCo\LocationManager\Models\CountryCurrency[] $country_currencies_currency
  * @package App\Models
  * @mixin IdeHelperCurrency
  */
-class Currency extends \App\Models\BaseModels\BaseModel
+class Currency extends \HaakCo\LocationManager\Models\BaseModels\BaseModel
 {
     protected $table = 'public.currencies';
 
@@ -54,6 +54,6 @@ class Currency extends \App\Models\BaseModels\BaseModel
 
     public function country_currencies_currency()
     {
-        return $this->hasMany(\App\Models\CountryCurrency::class, 'currency_id');
+        return $this->hasMany(\HaakCo\LocationManager\Models\CountryCurrency::class, 'currency_id');
     }
 }
