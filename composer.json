@@ -1,0 +1,48 @@
+{
+  "name": "haakco/locationmanager",
+  "description": ":package_description",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Tim Haak",
+      "email": "tim@haak.co",
+      "homepage": "https://haak.co"
+    }
+  ],
+  "homepage": "https://github.com/haakco/locationmanager",
+  "keywords": [
+    "Laravel",
+    "LocationManager"
+  ],
+  "require": {
+    "illuminate/support": "~7|~8",
+    "haakco/postgreshelper": "@dev",
+    "pragmarx/countries": "^0.7"
+  },
+  "require-dev": {
+    "roave/security-advisories": "dev-latest"
+    ,
+    "phpunit/phpunit": "~9.0",
+    "orchestra/testbench": "~5|~6"
+  },
+  "autoload": {
+    "psr-4": {
+      "HaakCo\\LocationManager\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "HaakCo\\LocationManager\\Tests\\": "tests"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "HaakCo\\LocationManager\\LocationManagerServiceProvider"
+      ],
+      "aliases": {
+        "LocationManager": "HaakCo\\LocationManager\\Facades\\LocationManager"
+      }
+    }
+  }
+}
