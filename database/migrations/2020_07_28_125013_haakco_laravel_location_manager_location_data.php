@@ -32,7 +32,7 @@ VALUES
 
         DB::unprepared(
             file_get_contents(
-                app_path() . '/../database/migrations/2020_07_28_125013_location_data_01_timezones.sql'
+                __DIR__ . '/2020_07_28_125013_location_data_01_timezones.sql'
             )
         );
 
@@ -40,7 +40,7 @@ VALUES
 
         DB::unprepared(
             file_get_contents(
-                app_path() . '/../database/migrations/2020_07_28_125013_location_data_02_countries.sql'
+                __DIR__ . '/2020_07_28_125013_location_data_02_countries.sql'
             )
         );
 
@@ -48,7 +48,7 @@ VALUES
 
         DB::unprepared(
             file_get_contents(
-                app_path() . '/../database/migrations/2020_07_28_125013_location_data_03_languages.sql'
+                __DIR__ . '/2020_07_28_125013_location_data_03_languages.sql'
             )
         );
 
@@ -56,7 +56,7 @@ VALUES
 
         DB::unprepared(
             file_get_contents(
-                app_path() . '/../database/migrations/2020_07_28_125013_location_data_04_currencies.sql'
+                __DIR__ . '/2020_07_28_125013_location_data_04_currencies.sql'
             )
         );
 
@@ -64,7 +64,7 @@ VALUES
 
         DB::unprepared(
             file_get_contents(
-                app_path() . '/../database/migrations/2020_07_28_125013_location_data_10_country_timezones.sql'
+                __DIR__ . '/2020_07_28_125013_location_data_10_country_timezones.sql'
             )
         );
 
@@ -72,7 +72,7 @@ VALUES
 
         DB::unprepared(
             file_get_contents(
-                app_path() . '/../database/migrations/2020_07_28_125013_location_data_11_country_languages.sql'
+                __DIR__ . '/2020_07_28_125013_location_data_11_country_languages.sql'
             )
         );
 
@@ -80,7 +80,7 @@ VALUES
 
         DB::unprepared(
             file_get_contents(
-                app_path() . '/../database/migrations/2020_07_28_125013_location_data_12_country_currencies.sql'
+                __DIR__ . '/2020_07_28_125013_location_data_12_country_currencies.sql'
             )
         );
 
@@ -94,12 +94,19 @@ VALUES
      */
     public function down()
     {
-        DB::table('country_currencies')->truncate();
-        DB::table('country_languages')->truncate();
-        DB::table('country_timezones')->truncate();
-        DB::table('currencies')->truncate();
-        DB::table('languages')->truncate();
-        DB::table('countries')->truncate();
-        DB::table('timezones')->truncate();
+        DB::table('country_currencies')
+            ->truncate();
+        DB::table('country_languages')
+            ->truncate();
+        DB::table('country_timezones')
+            ->truncate();
+        DB::table('currencies')
+            ->truncate();
+        DB::table('languages')
+            ->truncate();
+        DB::table('countries')
+            ->truncate();
+        DB::table('timezones')
+            ->truncate();
     }
 }
