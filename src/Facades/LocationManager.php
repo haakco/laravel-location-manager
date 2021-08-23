@@ -13,6 +13,6 @@ class LocationManager extends Facade
      */
     protected static function getFacadeAccessor(): string
     {
-        return 'locationmanager';
+        return 'LocationManager';
     }
 }

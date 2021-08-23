@@ -1,9 +1,9 @@
 <?php
 
-use App\Libraries\Helper\PgHelperLibrary;
+use HaakCo\PostgresHelper\Libraries\PgHelperLibrary;
 use Illuminate\Database\Migrations\Migration;
 
-class LocationData extends Migration
+class HaakcoLaravelLocationManagerLocationData extends Migration
 {
     /**
      * Run the migrations.

@@ -36,8 +36,12 @@ class LocationManagerServiceProvider extends ServiceProvider
     {
         // Publishing the configuration file.
         $this->publishes([
-                             __DIR__ . '/../config/locationmanager.php' => config_path('locationmanager.php'),
-                         ], 'locationmanager.config');
+            __DIR__ . '/../config/locationmanager.php' => config_path('locationmanager.php'),
+        ], 'locationmanager.config');
+
+        $this->publishes([
+            __DIR__ . '/../database/migrations/' => database_path('migrations')
+        ], 'locationmanager.migrations');
 
         // Publishing the views.
         /*$this->publishes([
@@ -55,13 +59,11 @@ class LocationManagerServiceProvider extends ServiceProvider
         ], 'locationmanager.views');*/
 
         // Registering package commands.
-        $this->commands(
-            [
-                CountryAdd::class,
-                CurrencyAdd::class,
-                TimezoneAddAll::class,
-            ]
-        );
+        $this->commands([
+            CountryAdd::class,
+            CurrencyAdd::class,
+            TimezoneAddAll::class,
+        ]);
     }
 
     /**
@@ -75,7 +77,7 @@ class LocationManagerServiceProvider extends ServiceProvider
 
         // Register the service the package provides.
         $this->app->singleton('locationmanager', function ($app) {
-            return new LocationManager;
+            return new LocationManager();
         });
     }
 

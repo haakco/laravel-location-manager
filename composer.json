@@ -1,5 +1,5 @@
 {
-  "name": "haakco/location-manager",
+  "name": "haakco/laravel-location-manager",
   "description": ":package_description",
   "license": "proprietary",
   "authors": [
@@ -9,7 +9,7 @@
       "homepage": "https://haak.co"
     }
   ],
-  "homepage": "https://github.com/haakco/locationmanager",
+  "homepage": "https://github.com/haakco/laravel-location-manager",
   "keywords": [
     "Laravel",
     "LocationManager"
