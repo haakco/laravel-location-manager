@@ -4,7 +4,7 @@
  * Created by Reliese Model.
  */
 
-namespace HaakCo\LocationManager\Models;
+namespace App\Models;
 
 
 
@@ -16,8 +16,8 @@ namespace HaakCo\LocationManager\Models;
  * @property \Carbon\Carbon $updated_at
  * @property string $deleted_at
  * @property string $name
- * @property \Illuminate\Database\Eloquent\Collection|\HaakCo\LocationManager\Models\Country[] $countries_continent
- * @package HaakCo\LocationManager\Models
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Country[] $countries_continent
+ * @package App\Models
  * @mixin IdeHelperContinent
  */
 class Continent extends \HaakCo\PostgresHelper\Models\BaseModels\BaseModel
@@ -34,6 +34,6 @@ class Continent extends \HaakCo\PostgresHelper\Models\BaseModels\BaseModel
 
     public function countries_continent()
     {
-        return $this->hasMany(\HaakCo\LocationManager\Models\Country::class, 'continent_id');
+        return $this->hasMany(\App\Models\Country::class, 'continent_id');
     }
 }

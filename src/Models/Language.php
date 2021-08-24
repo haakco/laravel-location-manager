@@ -4,7 +4,7 @@
  * Created by Reliese Model.
  */
 
-namespace HaakCo\LocationManager\Models;
+namespace App\Models;
 
 
 
@@ -19,9 +19,9 @@ namespace HaakCo\LocationManager\Models;
  * @property string $three_letter_code
  * @property string $name
  * @property string $local_name
- * @property \Illuminate\Database\Eloquent\Collection|\HaakCo\LocationManager\Models\Country[] $countries
- * @property \Illuminate\Database\Eloquent\Collection|\HaakCo\LocationManager\Models\CountryLanguage[] $country_languages_language
- * @package HaakCo\LocationManager\Models
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Country[] $countries
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\CountryLanguage[] $country_languages_language
+ * @package App\Models
  * @mixin IdeHelperLanguage
  */
 class Language extends \HaakCo\PostgresHelper\Models\BaseModels\BaseModel
@@ -41,13 +41,13 @@ class Language extends \HaakCo\PostgresHelper\Models\BaseModels\BaseModel
 
     public function countries()
     {
-        return $this->belongsToMany(\HaakCo\LocationManager\Models\Country::class, 'public.country_languages', 'language_id', 'attribute_dropdown_option_id')
-                    ->withPivot('id', 'country_id')
+        return $this->belongsToMany(\App\Models\Country::class, 'country_languages', 'language_id')
+                    ->withPivot('id')
                     ->withTimestamps();
     }
 
     public function country_languages_language()
     {
-        return $this->hasMany(\HaakCo\LocationManager\Models\CountryLanguage::class, 'language_id');
+        return $this->hasMany(\App\Models\CountryLanguage::class, 'language_id');
     }
 }

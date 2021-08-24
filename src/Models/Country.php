@@ -4,20 +4,16 @@
  * Created by Reliese Model.
  */
 
-namespace HaakCo\LocationManager\Models;
+namespace App\Models;
 
-use Carbon\Carbon;
-use HaakCo\PostgresHelper\Models\BaseModels\BaseModel;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Foundation\Auth\User;
+
 
 /**
  * Class Country
  *
  * @property int $id
- * @property Carbon $created_at
- * @property Carbon $updated_at
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
  * @property string $deleted_at
  * @property int $continent_id
  * @property boolean $is_active
@@ -33,23 +29,23 @@ use Illuminate\Foundation\Auth\User;
  * @property float $latitude_min
  * @property float $longitude_max
  * @property float $longitude_min
- * @property Continent $continent
- * @property Collection|PhoneNumber[] $phone_numbers_country
- * @property Collection|County[] $counties_country
- * @property Collection|City[] $cities_country
- * @property Collection|CountryCurrency[] $country_currencies_country
- * @property Collection|Address[] $addresses_country
- * @property Collection|CountryExtra[] $country_extras_country
- * @property Collection|Language[] $languages
- * @property Collection|CountryLanguage[] $country_languages_country
- * @property Collection|CountryLanguage[] $country_languages_attribute_dropdown_option
- * @property Collection|Timezone[] $timezones
- * @property Collection|CountryTimezone[] $country_timezones_country
- * @package HaakCo\LocationManager\Models
+ * @property \App\Models\Continent $continent
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\MonitorServer[] $monitor_servers_country
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\CountryCurrency[] $country_currencies_country
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\CountryExtra[] $country_extras_country
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\County[] $counties_country
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Language[] $languages
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\CountryLanguage[] $country_languages_country
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Timezone[] $timezones
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\CountryTimezone[] $country_timezones_country
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\City[] $cities_country
+ * @package App\Models
+ * @mixin IdeHelperCountry
  */
-class Country extends BaseModel
+class Country extends \HaakCo\PostgresHelper\Models\BaseModels\BaseModel
 {
-    use SoftDeletes;
+    use \Illuminate\Database\Eloquent\SoftDeletes;
+
 
 
     protected $table = 'countries';
@@ -85,80 +81,55 @@ class Country extends BaseModel
 
     public function continent()
     {
-        return $this->belongsTo(Continent::class, 'continent_id');
+        return $this->belongsTo(\App\Models\Continent::class, 'continent_id');
     }
 
-    public function phone_numbers_country()
+    public function monitor_servers_country()
     {
-        return $this->hasMany(PhoneNumber::class, 'country_id');
-    }
-
-    public function users()
-    {
-        return $this->belongsToMany(User::class, 'public.user_country', 'country_id')
-            ->withPivot('id')
-            ->withTimestamps();
-    }
-
-    public function counties_country()
-    {
-        return $this->hasMany(County::class, 'country_id');
-    }
-
-    public function cities_country()
-    {
-        return $this->hasMany(City::class, 'country_id');
+        return $this->hasMany(\App\Models\MonitorServer::class, 'country_id');
     }
 
     public function country_currencies_country()
     {
-        return $this->hasMany(CountryCurrency::class, 'country_id');
-    }
-
-    public function addresses_country()
-    {
-        return $this->hasMany(Address::class, 'country_id');
+        return $this->hasMany(\App\Models\CountryCurrency::class, 'country_id');
     }
 
     public function country_extras_country()
     {
-        return $this->hasMany(CountryExtra::class, 'country_id');
+        return $this->hasMany(\App\Models\CountryExtra::class, 'country_id');
+    }
+
+    public function counties_country()
+    {
+        return $this->hasMany(\App\Models\County::class, 'country_id');
     }
 
     public function languages()
     {
-        return $this->belongsToMany(
-            Language::class,
-            'public.country_languages',
-            'attribute_dropdown_option_id'
-        )
-            ->withPivot('id', 'country_id')
-            ->withTimestamps();
+        return $this->belongsToMany(\App\Models\Language::class, 'country_languages', 'country_id')
+                    ->withPivot('id')
+                    ->withTimestamps();
     }
 
     public function country_languages_country()
     {
-        return $this->hasMany(CountryLanguage::class, 'country_id');
-    }
-
-    public function country_languages_attribute_dropdown_option()
-    {
-        return $this->hasMany(CountryLanguage::class, 'attribute_dropdown_option_id');
+        return $this->hasMany(\App\Models\CountryLanguage::class, 'country_id');
     }
 
     public function timezones()
     {
-        return $this->belongsToMany(
-            Timezone::class,
-            'public.country_timezones',
-            'country_id'
-        )
-            ->withPivot('id')
-            ->withTimestamps();
+        return $this->belongsToMany(\App\Models\Timezone::class, 'country_timezones', 'country_id')
+                    ->withPivot('id')
+                    ->withTimestamps();
     }
 
     public function country_timezones_country()
     {
-        return $this->hasMany(CountryTimezone::class, 'country_id');
+        return $this->hasMany(\App\Models\CountryTimezone::class, 'country_id');
+    }
+
+    public function cities_country()
+    {
+        return $this->hasMany(\App\Models\City::class, 'country_id');
     }
 }

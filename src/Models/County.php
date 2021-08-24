@@ -4,7 +4,7 @@
  * Created by Reliese Model.
  */
 
-namespace HaakCo\LocationManager\Models;
+namespace App\Models;
 
 
 
@@ -17,10 +17,9 @@ namespace HaakCo\LocationManager\Models;
  * @property string $deleted_at
  * @property int $country_id
  * @property string $name
- * @property \HaakCo\LocationManager\Models\Country $country
- * @property \Illuminate\Database\Eloquent\Collection|\HaakCo\LocationManager\Models\City[] $cities_county
- * @property \Illuminate\Database\Eloquent\Collection|\HaakCo\LocationManager\Models\Address[] $addresses_county
- * @package HaakCo\LocationManager\Models
+ * @property \App\Models\Country $country
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\City[] $cities_county
+ * @package App\Models
  * @mixin IdeHelperCounty
  */
 class County extends \HaakCo\PostgresHelper\Models\BaseModels\BaseModel
@@ -42,16 +41,11 @@ class County extends \HaakCo\PostgresHelper\Models\BaseModels\BaseModel
 
     public function country()
     {
-        return $this->belongsTo(\HaakCo\LocationManager\Models\Country::class, 'country_id');
+        return $this->belongsTo(\App\Models\Country::class, 'country_id');
     }
 
     public function cities_county()
     {
-        return $this->hasMany(\HaakCo\LocationManager\Models\City::class, 'county_id');
-    }
-
-    public function addresses_county()
-    {
-        return $this->hasMany(\HaakCo\LocationManager\Models\Address::class, 'county_id');
+        return $this->hasMany(\App\Models\City::class, 'county_id');
     }
 }

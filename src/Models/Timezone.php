@@ -4,19 +4,16 @@
  * Created by Reliese Model.
  */
 
-namespace HaakCo\LocationManager\Models;
+namespace App\Models;
 
-use Carbon\Carbon;
-use HaakCo\PostgresHelper\Models\BaseModels\BaseModel;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 /**
  * Class Timezone
  *
  * @property int $id
- * @property Carbon $created_at
- * @property Carbon $updated_at
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
  * @property string $deleted_at
  * @property boolean $is_day_light_saving
  * @property string $name
@@ -26,14 +23,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $day_light_display_name
  * @property int $day_light_raw_offset
  * @property int $day_light_raw_offset_minutes
- * @property Collection|Country[] $countries
- * @property Collection|CountryTimezone[] $country_timezones_timezone
- * @package HaakCo\LocationManager\Models
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Country[] $countries
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\CountryTimezone[] $country_timezones_timezone
+ * @package App\Models
  * @mixin IdeHelperTimezone
  */
-class Timezone extends BaseModel
+class Timezone extends \HaakCo\PostgresHelper\Models\BaseModels\BaseModel
 {
-    use SoftDeletes;
+    use \Illuminate\Database\Eloquent\SoftDeletes;
+
 
 
     protected $table = 'timezones';
@@ -59,17 +57,13 @@ class Timezone extends BaseModel
 
     public function countries()
     {
-        return $this->belongsToMany(
-            Country::class,
-            'public.country_timezones',
-            'timezone_id'
-        )
-            ->withPivot('id')
-            ->withTimestamps();
+        return $this->belongsToMany(\App\Models\Country::class, 'country_timezones', 'timezone_id')
+                    ->withPivot('id')
+                    ->withTimestamps();
     }
 
     public function country_timezones_timezone()
     {
-        return $this->hasMany(CountryTimezone::class, 'timezone_id');
+        return $this->hasMany(\App\Models\CountryTimezone::class, 'timezone_id');
     }
 }
