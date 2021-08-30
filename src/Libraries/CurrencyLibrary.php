@@ -1,8 +1,10 @@
 <?php
 
-namespace HaakCo\LocationManager;
+declare(strict_types=1);
 
-use  HaakCo\LocationManager\Models\Currency;
+namespace HaakCo\LocationManager\Libraries;
+
+use HaakCo\LocationManager\Models\Currency;
 use Illuminate\Support\Facades\Log;
 use NumberFormatter;
 use PragmaRX\Coollection\Package\Coollection;
@@ -10,13 +12,12 @@ use PragmaRX\Countries\Package\Countries;
 
 use function app_path;
 use function array_key_exists;
+use function strlen;
 
 class CurrencyLibrary
 {
     private string $iso4217File = '/Libraries/Helper/CurrencyData/ISO_4217_2018-08-29.xml';
-    /**
-     * @var Countries
-     */
+
     private Countries $countries;
 
     private array $iso4217Currencies;
@@ -32,16 +33,16 @@ class CurrencyLibrary
      */
     private function loadIso4217Currencies(): array
     {
-        $xmlObject =
-            simplexml_load_string(
-                file_get_contents(app_path() . $this->iso4217File)
-            );
+        $xmlObject = simplexml_load_string(file_get_contents(app_path() . $this->iso4217File));
         $result = [];
         foreach ($xmlObject->CcyTbl->children() as $ccyNtry) {
             $result[(string)$ccyNtry->Ccy] = (array)$ccyNtry;
         }
+
         return $result;
     }
+
+    /** @noinspection PhpUndefinedMethodInspection */
 
     public function getAllCurrencies(): void
     {
@@ -53,50 +54,35 @@ class CurrencyLibrary
         }
     }
 
-    /** @noinspection PhpUndefinedMethodInspection */
-
-    /**
-     * @param string $currencyThreeCode
-     * @param string|null $countryCode
-     * @param string $locale
-     *
-     * @return mixed
-     * @noinspection PhpUndefinedFieldInspection
-     * @noinspection PhpUndefinedMethodInspection
-     */
-    public function getCurrencyFromCode(string $currencyThreeCode, ?string $countryCode = null, string $locale = 'en')
-    {
-        $currency = Currency::query()
-            ->where('code', $currencyThreeCode)
-            ->first();
+    public function getCurrencyFromCode(
+        string $currencyThreeCode,
+        ?string $countryCode = null,
+        string $locale = 'en'
+    ): ?Currency {
+        $currency =
+            Currency::query()
+                ->where('code', $currencyThreeCode)
+                ->first();
 
         if (!($currency instanceof Currency)) {
-            /**
-             * @var Coollection $currencyData
-             */
-            $currencyData =
-                $this->countries->currencies()
+            /** @var Coollection $currencyData */
+            $currencyData = $this->countries->currencies()
                     ->where('iso.code', $currencyThreeCode)
                     ->first();
 
             $currency = new Currency();
-            if ($currencyData === null || !isset($currencyData->units)) {
-                Log::error(
-                    "Error: Currency Can't find currency in library trying iso 4217 xml",
-                    [
+            if (null === $currencyData || !isset($currencyData->units)) {
+                Log::error("Error: Currency Can't find currency in library trying iso 4217 xml", [
+                    'currencyCode' => $currencyThreeCode,
+                    'countryCode' => $countryCode,
+                ]);
+                if (true === !array_key_exists($currencyThreeCode, $this->iso4217Currencies)) {
+                    Log::error('Error: Currency unknown currency code', [
                         'currencyCode' => $currencyThreeCode,
                         'countryCode' => $countryCode,
-                    ]
-                );
-                if (!array_key_exists($currencyThreeCode, $this->iso4217Currencies) === true) {
-                    Log::error(
-                        'Error: Currency unknown currency code',
-                        [
-                            'currencyCode' => $currencyThreeCode,
-                            'countryCode' => $countryCode,
-                        ]
-                    );
-                    return false;
+                    ]);
+
+                    return null;
                 }
                 $simpleData = $this->iso4217Currencies[$currencyThreeCode];
                 $currency->symbol = $this->getCurrencySymbol($currencyThreeCode, $locale);
@@ -108,12 +94,7 @@ class CurrencyLibrary
                 $currency->full_name = $simpleData['CcyNm'];
                 $currency->minor_name = '';
                 $currency->minor_symbol = '';
-                $currency->smallest_value_text = '0.' .
-                    str_pad(
-                        '',
-                        $simpleData['CcyMnrUnts'] - 1,
-                        "0"
-                    );
+                $currency->smallest_value_text = '0.' . str_pad('', $simpleData['CcyMnrUnts'] - 1, '0');
                 $currency->decimal_places = $simpleData['CcyMnrUnts'];
             } else {
                 $currency->symbol = $currencyData->units->major->symbol;
@@ -126,10 +107,11 @@ class CurrencyLibrary
                 $currency->minor_name = $currencyData->units->minor->name;
                 $currency->minor_symbol = $currencyData->units->minor->symbol;
                 $currency->smallest_value_text = (string)$currencyData->units->minor->majorValue;
-                $currency->decimal_places = strlen(substr(strrchr($currencyData->units->minor->majorValue, "."), 1));
+                $currency->decimal_places = strlen(substr(strrchr($currencyData->units->minor->majorValue, '.'), 1));
             }
         }
         $currency->save();
+
         return $currency;
     }
 
@@ -142,6 +124,7 @@ class CurrencyLibrary
     public function getCurrencySymbol($currencyCode, $locale = 'en_UK'): string
     {
         $formatter = new NumberFormatter($locale . '@currency=' . $currencyCode, NumberFormatter::CURRENCY);
+
         return $formatter->getSymbol(NumberFormatter::CURRENCY_SYMBOL);
     }
 }

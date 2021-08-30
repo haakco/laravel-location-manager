@@ -1,47 +1,41 @@
 <?php
 
+declare(strict_types=1);
+
+namespace HaakCo\LocationManager\Models;
+
+use Carbon\Carbon;
+use HaakCo\PostgresHelper\Models\BaseModels\BaseModel;
+
 /**
- * Created by Reliese Model.
- */
-
-namespace App\Models;
-
-
-
-/**
- * Class CountryLanguage
+ * Class CountryLanguage.
  *
  * @property int $id
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
  * @property int $country_id
  * @property int $language_id
- * @property \App\Models\Country $country
- * @property \App\Models\Language $language
- * @package App\Models
- * @mixin IdeHelperCountryLanguage
+ * @property Country $country
+ * @property Language $language
  */
-class CountryLanguage extends \HaakCo\PostgresHelper\Models\BaseModels\BaseModel
+class CountryLanguage extends BaseModel
 {
     protected $table = 'country_languages';
 
     protected $casts = [
         'country_id' => 'int',
-        'language_id' => 'int'
+        'language_id' => 'int',
     ];
 
-    protected $fillable = [
-        'country_id',
-        'language_id'
-    ];
+    protected $fillable = ['country_id', 'language_id'];
 
     public function country()
     {
-        return $this->belongsTo(\App\Models\Country::class, 'country_id');
+        return $this->belongsTo(Country::class, 'country_id');
     }
 
     public function language()
     {
-        return $this->belongsTo(\App\Models\Language::class, 'language_id');
+        return $this->belongsTo(Language::class, 'language_id');
     }
 }

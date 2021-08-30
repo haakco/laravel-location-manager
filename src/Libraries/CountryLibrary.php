@@ -1,38 +1,30 @@
 <?php
 
+declare(strict_types=1);
+
 namespace HaakCo\LocationManager\Libraries;
 
-use  HaakCo\LocationManager\Libraries\Helper\CurrencyLibrary;
-use  HaakCo\LocationManager\Models\Continent;
-use  HaakCo\LocationManager\Models\Country;
-use  HaakCo\LocationManager\Models\CountryCurrency;
-use  HaakCo\LocationManager\Models\CountryLanguage;
-use  HaakCo\LocationManager\Models\CountryTimezone;
-use  HaakCo\LocationManager\Models\Currency;
-use  HaakCo\LocationManager\Models\Enums\ContinentsEnum;
-use  HaakCo\LocationManager\Models\Language;
+use HaakCo\LocationManager\Models\Continent;
+use HaakCo\LocationManager\Models\Country;
+use HaakCo\LocationManager\Models\CountryCurrency;
+use HaakCo\LocationManager\Models\CountryLanguage;
+use HaakCo\LocationManager\Models\CountryTimezone;
+use HaakCo\LocationManager\Models\Currency;
+use HaakCo\LocationManager\Models\Enums\ContinentsEnum;
+use HaakCo\LocationManager\Models\Language;
 use Illuminate\Support\Facades\Log;
 use PragmaRX\Countries\Package\Countries;
 use RuntimeException;
 
 use function array_values;
-use function is_string;
-use function strlen;
 use function strtoupper;
 
 class CountryLibrary
 {
-    /**
-     * @var CurrencyLibrary
-     */
     private CurrencyLibrary $currencyLibrary;
-    /**
-     * @var TimezoneLibrary
-     */
+
     private TimezoneLibrary $timezoneLibrary;
-    /**
-     * @var Countries
-     */
+
     private Countries $countries;
 
     private array $ignoreCodes = [
@@ -67,44 +59,37 @@ class CountryLibrary
             $this->countries->all()
                 ->pluck('cca2');
         foreach ($countryCodes as $countryCode) {
-            if (strlen($countryCode) === 2) {
+            if (2 === \strlen($countryCode)) {
                 if (isset($this->ignoreCodes[$countryCode])) {
-                    Log::error(
-                        'Error: Country ignoring from ignore list',
-                        [
-                            'countryCode' => $countryCode,
-                            'name' => $this->ignoreCodes[$countryCode],
-                        ]
-                    );
+                    Log::error('Error: Country ignoring from ignore list', [
+                        'countryCode' => $countryCode,
+                        'name' => $this->ignoreCodes[$countryCode],
+                    ]);
                 } else {
                     $this->getCountryFrom2LetterCode($countryCode);
                 }
             } else {
-                Log::error(
-                    'Error: Country ignoring all none 2 letter codes',
-                    [
-                        'countryCode' => $countryCode,
-                    ]
-                );
+                Log::error('Error: Country ignoring all none 2 letter codes', [
+                    'countryCode' => $countryCode,
+                ]);
             }
         }
     }
 
     public function getCountryFrom2LetterCode(string $countryCode): ?Country
     {
-        if ($countryCode === 'EU') {
-            Log::error(
-                'Error: Eu is not a country',
-                [
-                    'countryCode' => $countryCode,
-                ]
-            );
+        if ('EU' === $countryCode) {
+            Log::error('Error: Eu is not a country', [
+                'countryCode' => $countryCode,
+            ]);
+
             return null;
         }
         $countryCode = strtoupper($countryCode);
-        $country = Country::query()
-            ->where('iso_code', $countryCode)
-            ->first();
+        $country =
+            Country::query()
+                ->where('iso_code', $countryCode)
+                ->first();
 
         /** @noinspection PhpUndefinedMethodInspection */
         $countryInfo =
@@ -112,59 +97,47 @@ class CountryLibrary
                 ->first();
         if (!($country instanceof Country)) {
             $continentId = ContinentsEnum::NONE_ID;
-            if (isset($countryInfo->geo['continent']) && is_array($countryInfo->geo['continent'])) {
+            if (isset($countryInfo->geo['continent']) && \is_array($countryInfo->geo['continent'])) {
                 $continent = $this->getContinent(array_values($countryInfo->geo['continent'])[0]);
                 if ($continent instanceof Continent) {
                     $continentId = $continent->id;
                 }
             } else {
-                Log::error(
-                    'Error: Country has no continents',
-                    [
-                        'countryCode' => $countryCode,
-                    ]
-                );
+                Log::error('Error: Country has no continents', [
+                    'countryCode' => $countryCode,
+                ]);
             }
 
             $country = new Country();
             $country->continent_id = $continentId;
-            if ((string)$countryInfo->cca2 === 'XK') {
+            if ('XK' === (string)$countryInfo->cca2) {
                 $ccn3 = 383;
             } else {
                 try {
                     $ccn3 = (int)$countryInfo->ccn3;
-                    if ($ccn3 === 0) {
+                    if (0 === $ccn3) {
                         $ccn3 = null;
-                        Log::error(
-                            'Error: Country has invalid ccn3',
-                            [
-                                'countryCode' => $countryCode,
-                            ]
-                        );
+                        Log::error('Error: Country has invalid ccn3', [
+                            'countryCode' => $countryCode,
+                        ]);
                     }
                 } catch (RuntimeException $exception) {
                     $ccn3 = null;
-                    Log::error(
-                        'Error: Country has no ccn3',
-                        [
-                            'countryCode' => $countryCode,
-                        ]
-                    );
+                    Log::error('Error: Country has no ccn3', [
+                        'countryCode' => $countryCode,
+                    ]);
                 }
             }
 
-            if (isset($countryInfo->flag->emoji) && is_string($countryInfo->flag->emoji)) {
+            if (isset($countryInfo->flag->emoji) && \is_string($countryInfo->flag->emoji)) {
                 $emoji = $countryInfo->flag->emoji;
             } elseif (isset($this->missingFlags[$countryCode])) {
                 $emoji = $this->missingFlags[$countryCode];
             } else {
                 $emoji = null;
-                Log::error(
-                    'Error: Country missing emoji flag',
-                    [
-                        'countryCode' => $countryCode,
-                    ]
-                );
+                Log::error('Error: Country missing emoji flag', [
+                    'countryCode' => $countryCode,
+                ]);
             }
             $country->iso_code = (string)$countryInfo->cca2;
             $country->iso_three_code = (string)$countryInfo->cca3;
@@ -178,36 +151,28 @@ class CountryLibrary
             $country->longitude_min = (float)($countryInfo->geo['min_longitude'] ?? 0);
         }
         $country->name = (string)$countryInfo->name['common'];
-        if (
-            isset($countryInfo->name['official']) &&
-            is_string($countryInfo->name['official']) &&
-            $countryInfo->name['official'] !== ''
-        ) {
+        if (isset($countryInfo->name['official']) &&
+            \is_string($countryInfo->name['official']) &&
+            '' !== $countryInfo->name['official']) {
             $officialName = $countryInfo->name['official'];
         } else {
             $officialName = (string)$countryInfo->name['common'];
-            Log::error(
-                'Error: Country missing official name',
-                [
-                    'countryCode' => $countryCode,
-                ]
-            );
+            Log::error('Error: Country missing official name', [
+                'countryCode' => $countryCode,
+            ]);
         }
         $country->official_name = $officialName;
         $country->save();
         $country = Country::firstWhere('iso_code', $countryCode);
 
-        /** @noinspection MissingIssetImplementationInspection */
+        // @noinspection MissingIssetImplementationInspection
         if (!isset($countryInfo->currencies)) {
-            Log::error(
-                'Error: Country missing currencies',
-                [
-                    'countryCode' => $countryCode,
-                ]
-            );
+            Log::error('Error: Country missing currencies', [
+                'countryCode' => $countryCode,
+            ]);
         } else {
             foreach ($countryInfo->currencies as $currencyKey => $currencyThreeCode) {
-                if (!is_string($currencyThreeCode)) {
+                if (!\is_string($currencyThreeCode)) {
                     $currencyThreeCode = $currencyKey;
                 }
                 $languageCode =
@@ -220,67 +185,56 @@ class CountryLibrary
                 );
 
                 if ($currency instanceof Currency) {
-                    CountryCurrency::firstOrCreate(
-                        [
-                            'currency_id' => $currency->id,
-                            'country_id' => $country->id,
-                        ]
-                    );
+                    CountryCurrency::firstOrCreate([
+                        'currency_id' => $currency->id,
+                        'country_id' => $country->id,
+                    ]);
                 }
             }
         }
 
-
-        /** @noinspection MissingIssetImplementationInspection */
+        // @noinspection MissingIssetImplementationInspection
         if (!isset($countryInfo->languages)) {
-            Log::error(
-                'Error: Country missing languages',
-                [
-                    'countryCode' => $countryCode,
-                ]
-            );
+            Log::error('Error: Country missing languages', [
+                'countryCode' => $countryCode,
+            ]);
         } else {
             foreach ($countryInfo->languages as $threeCode => $languageName) {
                 $language = $this->getLanguage($threeCode, $languageName);
 
                 if ($language instanceof Language) {
-                    CountryLanguage::firstOrCreate(
-                        [
-                            'country_id' => $country->id,
-                            'language_id' => $language->id,
-                        ]
-                    );
+                    CountryLanguage::firstOrCreate([
+                        'country_id' => $country->id,
+                        'language_id' => $language->id,
+                    ]);
                 } else {
-                    Log::error(
-                        "Error: Country can't find language",
-                        [
-                            'language_three_letter_code' => $threeCode,
-                            'language_name' => $languageName,
-                        ]
-                    );
+                    Log::error("Error: Country can't find language", [
+                        'language_three_letter_code' => $threeCode,
+                        'language_name' => $languageName,
+                    ]);
                 }
             }
         }
 
-        /** @noinspection PhpUndefinedMethodInspection */
+        // @noinspection PhpUndefinedMethodInspection
         foreach ($countryInfo->hydrate('timezones')->timezones as $timezone) {
             $timezone = $this->timezoneLibrary->getTimezone($timezone['zone_name']);
 
-            CountryTimezone::firstOrCreate(
-                [
-                    'country_id' => $country->id,
-                    'timezone_id' => $timezone->id,
-                ]
-            );
+            CountryTimezone::firstOrCreate([
+                'country_id' => $country->id,
+                'timezone_id' => $timezone->id,
+            ]);
         }
+
         return $country;
     }
 
     public function getContinent(string $name): Continent
     {
-        $continent = Continent::query()
-            ->where('name', $name)
-            ->first();
+        $continent =
+            Continent::query()
+                ->where('name', $name)
+                ->first();
 
         if (!($continent instanceof Continent)) {
             $continent = new Continent();
@@ -292,16 +246,14 @@ class CountryLibrary
     }
 
     /**
-     * @param string $threeCode
      * @param $name
-     *
-     * @return Language
      */
     public function getLanguage(string $threeCode, string $name): Language
     {
-        $language = Language::query()
-            ->where('three_letter_code', $threeCode)
-            ->first();
+        $language =
+            Language::query()
+                ->where('three_letter_code', $threeCode)
+                ->first();
         if (!$language instanceof Language) {
             $language = new Language();
             $language->name = $name;
@@ -312,6 +264,7 @@ class CountryLibrary
             $language->name = $name;
         }
         $language->save();
+
         return $language;
     }
 }

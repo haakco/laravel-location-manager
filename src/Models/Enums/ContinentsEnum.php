@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace HaakCo\LocationManager\Models\Enums;
 
 class ContinentsEnum

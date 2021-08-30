@@ -1,47 +1,41 @@
 <?php
 
+declare(strict_types=1);
+
+namespace HaakCo\LocationManager\Models;
+
+use Carbon\Carbon;
+use HaakCo\PostgresHelper\Models\BaseModels\BaseModel;
+
 /**
- * Created by Reliese Model.
- */
-
-namespace App\Models;
-
-
-
-/**
- * Class CountryCurrency
+ * Class CountryCurrency.
  *
  * @property int $id
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
  * @property int $country_id
  * @property int $currency_id
- * @property \App\Models\Country $country
- * @property \App\Models\Currency $currency
- * @package App\Models
- * @mixin IdeHelperCountryCurrency
+ * @property Country $country
+ * @property Currency $currency
  */
-class CountryCurrency extends \HaakCo\PostgresHelper\Models\BaseModels\BaseModel
+class CountryCurrency extends BaseModel
 {
-    protected $table = 'country_currencies';
+    protected string $table = 'country_currencies';
 
-    protected $casts = [
+    protected array $casts = [
         'country_id' => 'int',
-        'currency_id' => 'int'
+        'currency_id' => 'int',
     ];
 
-    protected $fillable = [
-        'country_id',
-        'currency_id'
-    ];
+    protected array $fillable = ['country_id', 'currency_id'];
 
     public function country()
     {
-        return $this->belongsTo(\App\Models\Country::class, 'country_id');
+        return $this->belongsTo(Country::class, 'country_id');
     }
 
     public function currency()
     {
-        return $this->belongsTo(\App\Models\Currency::class, 'currency_id');
+        return $this->belongsTo(Currency::class, 'currency_id');
     }
 }

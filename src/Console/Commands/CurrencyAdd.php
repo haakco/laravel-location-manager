@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace HaakCo\LocationManager\Console\Commands;
 
-use  HaakCo\LocationManager\Libraries\Helper\CurrencyLibrary;
-use Exception;
+use  Exception;
+use HaakCo\LocationManager\Libraries\CurrencyLibrary;
 use Illuminate\Console\Command;
 
 class CurrencyAdd extends Command
@@ -25,18 +27,16 @@ class CurrencyAdd extends Command
     /**
      * Execute the console command.
      *
-     * @param CurrencyLibrary $currencyLibrary
-     *
-     * @return int
      * @throws Exception
      */
     public function handle(CurrencyLibrary $currencyLibrary): int
     {
-        if ($this->argument('currency_code') === 'all') {
+        if ('all' === $this->argument('currency_code')) {
             $currencyLibrary->getAllCurrencies();
         } else {
             $currencyLibrary->getCurrencyFromCode($this->argument('currency_code'));
         }
+
         return 0;
     }
 }

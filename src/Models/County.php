@@ -1,51 +1,45 @@
 <?php
 
+declare(strict_types=1);
+
+namespace HaakCo\LocationManager\Models;
+
+use Carbon\Carbon;
+use HaakCo\PostgresHelper\Models\BaseModels\BaseModel;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 /**
- * Created by Reliese Model.
- */
-
-namespace App\Models;
-
-
-
-/**
- * Class County
+ * Class County.
  *
  * @property int $id
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
  * @property string $deleted_at
  * @property int $country_id
  * @property string $name
- * @property \App\Models\Country $country
- * @property \Illuminate\Database\Eloquent\Collection|\App\Models\City[] $cities_county
- * @package App\Models
- * @mixin IdeHelperCounty
+ * @property Country $country
+ * @property City[]|Collection $cities_county
  */
-class County extends \HaakCo\PostgresHelper\Models\BaseModels\BaseModel
+class County extends BaseModel
 {
-    use \Illuminate\Database\Eloquent\SoftDeletes;
-
-
+    use SoftDeletes;
 
     protected $table = 'counties';
 
     protected $casts = [
-        'country_id' => 'int'
+        'country_id' => 'int',
     ];
 
-    protected $fillable = [
-        'country_id',
-        'name'
-    ];
+    protected $fillable = ['country_id', 'name'];
 
     public function country()
     {
-        return $this->belongsTo(\App\Models\Country::class, 'country_id');
+        return $this->belongsTo(Country::class, 'country_id');
     }
 
     public function cities_county()
     {
-        return $this->hasMany(\App\Models\City::class, 'county_id');
+        return $this->hasMany(City::class, 'county_id');
     }
 }

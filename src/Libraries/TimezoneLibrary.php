@@ -1,9 +1,11 @@
 <?php
 
-namespace HaakCo\LocationManager\Libraries\Location;
+declare(strict_types=1);
 
-use  HaakCo\LocationManager\Models\Timezone;
+namespace HaakCo\LocationManager\Libraries;
+
 use DateTimeZone;
+use HaakCo\LocationManager\Models\Timezone;
 use IntlTimeZone;
 
 class TimezoneLibrary
@@ -19,9 +21,10 @@ class TimezoneLibrary
 
     public function getTimezone(string $tzName): Timezone
     {
-        $timeZone = Timezone::query()
-            ->where('name', $tzName)
-            ->first();
+        $timeZone =
+            Timezone::query()
+                ->where('name', $tzName)
+                ->first();
 
         if (!($timeZone instanceof Timezone)) {
             $timeZone = new Timezone();
@@ -33,15 +36,16 @@ class TimezoneLibrary
             $timeZone->is_day_light_saving = $tz->useDaylightTime();
             $timeZone->display_name = $tz->getDisplayName();
             $timeZone->raw_offset = $tz->getRawOffset();
-            /** @noinspection PhpRedundantOptionalArgumentInspection */
+            // @noinspection PhpRedundantOptionalArgumentInspection
             $timeZone->raw_offset_minutes = round($tz->getRawOffset() / 1000 / 60, 0);
             $timeZone->day_light_display_name = $timeZone->is_day_light_saving ? $tz->getDisplayName(true) : '';
             $timeZone->day_light_raw_offset = $timeZone->is_day_light_saving ? $tz->getDSTSavings() : 0;
-            /** @noinspection PhpRedundantOptionalArgumentInspection */
+            // @noinspection PhpRedundantOptionalArgumentInspection
             $timeZone->day_light_raw_offset_minutes =
                 $timeZone->is_day_light_saving ? round($tz->getDSTSavings() / 1000 / 60, 0) : 0;
             $timeZone->save();
         }
+
         return $timeZone;
     }
 }

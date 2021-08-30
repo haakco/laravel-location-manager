@@ -1,21 +1,26 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Created by Reliese Model.
  */
 
-namespace App\Models;
+namespace HaakCo\LocationManager\Models;
 
-
+use Carbon\Carbon;
+use HaakCo\PostgresHelper\Models\BaseModels\BaseModel;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class Timezone
+ * Class Timezone.
  *
  * @property int $id
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
  * @property string $deleted_at
- * @property boolean $is_day_light_saving
+ * @property bool $is_day_light_saving
  * @property string $name
  * @property string $display_name
  * @property int $raw_offset
@@ -23,16 +28,12 @@ namespace App\Models;
  * @property string $day_light_display_name
  * @property int $day_light_raw_offset
  * @property int $day_light_raw_offset_minutes
- * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Country[] $countries
- * @property \Illuminate\Database\Eloquent\Collection|\App\Models\CountryTimezone[] $country_timezones_timezone
- * @package App\Models
- * @mixin IdeHelperTimezone
+ * @property Collection|Country[] $countries
+ * @property Collection|CountryTimezone[] $country_timezones_timezone
  */
-class Timezone extends \HaakCo\PostgresHelper\Models\BaseModels\BaseModel
+class Timezone extends BaseModel
 {
-    use \Illuminate\Database\Eloquent\SoftDeletes;
-
-
+    use SoftDeletes;
 
     protected $table = 'timezones';
 
@@ -41,7 +42,7 @@ class Timezone extends \HaakCo\PostgresHelper\Models\BaseModels\BaseModel
         'raw_offset' => 'int',
         'raw_offset_minutes' => 'int',
         'day_light_raw_offset' => 'int',
-        'day_light_raw_offset_minutes' => 'int'
+        'day_light_raw_offset_minutes' => 'int',
     ];
 
     protected $fillable = [
@@ -52,18 +53,19 @@ class Timezone extends \HaakCo\PostgresHelper\Models\BaseModels\BaseModel
         'raw_offset_minutes',
         'day_light_display_name',
         'day_light_raw_offset',
-        'day_light_raw_offset_minutes'
+        'day_light_raw_offset_minutes',
     ];
 
     public function countries()
     {
-        return $this->belongsToMany(\App\Models\Country::class, 'country_timezones', 'timezone_id')
-                    ->withPivot('id')
-                    ->withTimestamps();
+        return $this->belongsToMany(Country::class, 'country_timezones', 'timezone_id')
+            ->withPivot('id')
+            ->withTimestamps()
+        ;
     }
 
     public function country_timezones_timezone()
     {
-        return $this->hasMany(\App\Models\CountryTimezone::class, 'timezone_id');
+        return $this->hasMany(CountryTimezone::class, 'timezone_id');
     }
 }

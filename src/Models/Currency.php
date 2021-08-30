@@ -1,19 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
+namespace HaakCo\LocationManager\Models;
+
+use Carbon\Carbon;
+use HaakCo\PostgresHelper\Models\BaseModels\BaseModel;
+use Illuminate\Database\Eloquent\Collection;
+
 /**
- * Created by Reliese Model.
- */
-
-namespace App\Models;
-
-
-
-/**
- * Class Currency
+ * Class Currency.
  *
  * @property int $id
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
  * @property string $symbol
  * @property string $locale_symbol
  * @property string $en_symbol
@@ -25,17 +25,15 @@ namespace App\Models;
  * @property string $minor_symbol
  * @property string $smallest_value_text
  * @property int $decimal_places
- * @property \Illuminate\Database\Eloquent\Collection|\App\Models\CountryCurrency[] $country_currencies_currency
- * @package App\Models
- * @mixin IdeHelperCurrency
+ * @property Collection|CountryCurrency[] $country_currencies_currency
  */
-class Currency extends \HaakCo\PostgresHelper\Models\BaseModels\BaseModel
+class Currency extends BaseModel
 {
     protected $table = 'currencies';
 
     protected $casts = [
         'numeric_code' => 'int',
-        'decimal_places' => 'int'
+        'decimal_places' => 'int',
     ];
 
     protected $fillable = [
@@ -49,11 +47,11 @@ class Currency extends \HaakCo\PostgresHelper\Models\BaseModels\BaseModel
         'minor_name',
         'minor_symbol',
         'smallest_value_text',
-        'decimal_places'
+        'decimal_places',
     ];
 
     public function country_currencies_currency()
     {
-        return $this->hasMany(\App\Models\CountryCurrency::class, 'currency_id');
+        return $this->hasMany(CountryCurrency::class, 'currency_id');
     }
 }

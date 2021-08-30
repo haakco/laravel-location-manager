@@ -1,22 +1,26 @@
 <?php
 
+declare(strict_types=1);
+
+namespace HaakCo\LocationManager\Models;
+
+use Carbon\Carbon;
+use HaakCo\PostgresHelper\Models\BaseModels\BaseModel;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 /**
- * Created by Reliese Model.
- */
-
-namespace App\Models;
-
-
-
-/**
- * Class Country
+ * Class Country.
  *
  * @property int $id
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
  * @property string $deleted_at
  * @property int $continent_id
- * @property boolean $is_active
+ * @property bool $is_active
  * @property string $iso_code
  * @property string $iso_three_code
  * @property int $iso_numeric
@@ -29,26 +33,21 @@ namespace App\Models;
  * @property float $latitude_min
  * @property float $longitude_max
  * @property float $longitude_min
- * @property \App\Models\Continent $continent
- * @property \Illuminate\Database\Eloquent\Collection|\App\Models\MonitorServer[] $monitor_servers_country
- * @property \Illuminate\Database\Eloquent\Collection|\App\Models\CountryCurrency[] $country_currencies_country
- * @property \Illuminate\Database\Eloquent\Collection|\App\Models\CountryExtra[] $country_extras_country
- * @property \Illuminate\Database\Eloquent\Collection|\App\Models\County[] $counties_country
- * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Language[] $languages
- * @property \Illuminate\Database\Eloquent\Collection|\App\Models\CountryLanguage[] $country_languages_country
- * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Timezone[] $timezones
- * @property \Illuminate\Database\Eloquent\Collection|\App\Models\CountryTimezone[] $country_timezones_country
- * @property \Illuminate\Database\Eloquent\Collection|\App\Models\City[] $cities_country
- * @package App\Models
- * @mixin IdeHelperCountry
+ * @property Continent $continent
+ * @property Collection|CountryCurrency[] $country_currencies_country
+ * @property Collection|CountryExtra[] $country_extras_country
+ * @property Collection|County[] $counties_country
+ * @property Collection|Language[] $languages
+ * @property Collection|CountryLanguage[] $country_languages_country
+ * @property Collection|Timezone[] $timezones
+ * @property Collection|CountryTimezone[] $country_timezones_country
+ * @property City[]|Collection $cities_country
  */
-class Country extends \HaakCo\PostgresHelper\Models\BaseModels\BaseModel
+class Country extends BaseModel
 {
-    use \Illuminate\Database\Eloquent\SoftDeletes;
+    use SoftDeletes;
 
-
-
-    protected $table = 'countries';
+    protected string $table = 'countries';
 
     protected $casts = [
         'continent_id' => 'int',
@@ -59,10 +58,10 @@ class Country extends \HaakCo\PostgresHelper\Models\BaseModels\BaseModel
         'latitude_max' => 'decimal:6',
         'latitude_min' => 'decimal:6',
         'longitude_max' => 'decimal:6',
-        'longitude_min' => 'decimal:6'
+        'longitude_min' => 'decimal:6',
     ];
 
-    protected $fillable = [
+    protected array $fillable = [
         'continent_id',
         'is_active',
         'iso_code',
@@ -76,60 +75,79 @@ class Country extends \HaakCo\PostgresHelper\Models\BaseModels\BaseModel
         'latitude_max',
         'latitude_min',
         'longitude_max',
-        'longitude_min'
+        'longitude_min',
     ];
 
-    public function continent()
+    public function continent(): BelongsTo|Continent
     {
-        return $this->belongsTo(\App\Models\Continent::class, 'continent_id');
+        return $this->belongsTo(Continent::class, 'continent_id');
     }
 
-    public function monitor_servers_country()
+    /**
+     * @return HasMany
+     */
+    public function currenciesCountry(): HasMany
     {
-        return $this->hasMany(\App\Models\MonitorServer::class, 'country_id');
+        return $this->hasMany(CountryCurrency::class, 'country_id');
     }
 
-    public function country_currencies_country()
+    /**
+     * @return HasMany|CountryExtra[]
+     */
+    public function countryExtras(): HasMany|array
     {
-        return $this->hasMany(\App\Models\CountryCurrency::class, 'country_id');
+        return $this->hasMany(CountryExtra::class, 'country_id');
     }
 
-    public function country_extras_country()
+    /**
+     * @return HasMany|County[]
+     */
+    public function counties(): HasMany|array
     {
-        return $this->hasMany(\App\Models\CountryExtra::class, 'country_id');
+        return $this->hasMany(County::class, 'country_id');
     }
 
-    public function counties_country()
+    /**
+     * @return BelongsToMany|Language[]
+     */
+    public function languages(): BelongsToMany|array
     {
-        return $this->hasMany(\App\Models\County::class, 'country_id');
+        return $this->belongsToMany(Language::class, 'country_languages', 'country_id')
+            ->withPivot('id')
+            ->withTimestamps();
     }
 
-    public function languages()
+    /**
+     * @return HasMany|CountryLanguage[]
+     */
+    public function countryLanguages(): HasMany|array
     {
-        return $this->belongsToMany(\App\Models\Language::class, 'country_languages', 'country_id')
-                    ->withPivot('id')
-                    ->withTimestamps();
+        return $this->hasMany(CountryLanguage::class, 'country_id');
     }
 
-    public function country_languages_country()
+    /**
+     * @return BelongsToMany|Timezone[]
+     */
+    public function timezones(): BelongsToMany|array
     {
-        return $this->hasMany(\App\Models\CountryLanguage::class, 'country_id');
+        return $this->belongsToMany(Timezone::class, 'country_timezones', 'country_id')
+            ->withPivot('id')
+            ->withTimestamps();
     }
 
-    public function timezones()
+    /**
+     * @return HasMany|CountryTimezone[]
+     */
+    public function countryTimezones(): HasMany|array
     {
-        return $this->belongsToMany(\App\Models\Timezone::class, 'country_timezones', 'country_id')
-                    ->withPivot('id')
-                    ->withTimestamps();
+        return $this->hasMany(CountryTimezone::class, 'country_id');
     }
 
-    public function country_timezones_country()
+    /**
+     * @return HasMany|City[]
+     */
+    public function cities(): HasMany|array
     {
-        return $this->hasMany(\App\Models\CountryTimezone::class, 'country_id');
-    }
-
-    public function cities_country()
-    {
-        return $this->hasMany(\App\Models\City::class, 'country_id');
+        return $this->hasMany(City::class, 'country_id');
     }
 }

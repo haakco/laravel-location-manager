@@ -1,39 +1,38 @@
 <?php
 
+declare(strict_types=1);
+
+namespace HaakCo\LocationManager\Models;
+
+use Carbon\Carbon;
+use HaakCo\PostgresHelper\Models\BaseModels\BaseModel;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 /**
- * Created by Reliese Model.
- */
-
-namespace App\Models;
-
-
-
-/**
- * Class Continent
+ * Class Continent.
  *
  * @property int $id
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
  * @property string $deleted_at
  * @property string $name
- * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Country[] $countries_continent
- * @package App\Models
- * @mixin IdeHelperContinent
+ * @property Collection|Country[] $countries_continent
  */
-class Continent extends \HaakCo\PostgresHelper\Models\BaseModels\BaseModel
+class Continent extends BaseModel
 {
-    use \Illuminate\Database\Eloquent\SoftDeletes;
+    use SoftDeletes;
 
+    protected string $table = 'continents';
 
+    protected array $fillable = ['name'];
 
-    protected $table = 'continents';
-
-    protected $fillable = [
-        'name'
-    ];
-
-    public function countries_continent()
+    /**
+     * @return HasMany|Country[]
+     */
+    public function countries(): HasMany|array
     {
-        return $this->hasMany(\App\Models\Country::class, 'continent_id');
+        return $this->hasMany(Country::class, 'continent_id');
     }
 }

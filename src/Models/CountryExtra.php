@@ -1,40 +1,34 @@
 <?php
 
+declare(strict_types=1);
+
+namespace HaakCo\LocationManager\Models;
+
+use Carbon\Carbon;
+use HaakCo\PostgresHelper\Models\BaseModels\BaseModel;
+
 /**
- * Created by Reliese Model.
- */
-
-namespace App\Models;
-
-
-
-/**
- * Class CountryExtra
+ * Class CountryExtra.
  *
  * @property int $id
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
  * @property int $country_id
  * @property string $json_data
- * @property \App\Models\Country $country
- * @package App\Models
- * @mixin IdeHelperCountryExtra
+ * @property Country $country
  */
-class CountryExtra extends \HaakCo\PostgresHelper\Models\BaseModels\BaseModel
+class CountryExtra extends BaseModel
 {
-    protected $table = 'country_extra';
+    protected string $table = 'country_extra';
 
-    protected $casts = [
-        'country_id' => 'int'
+    protected array $casts = [
+        'country_id' => 'int',
     ];
 
-    protected $fillable = [
-        'country_id',
-        'json_data'
-    ];
+    protected array $fillable = ['country_id', 'json_data'];
 
     public function country()
     {
-        return $this->belongsTo(\App\Models\Country::class, 'country_id');
+        return $this->belongsTo(Country::class, 'country_id');
     }
 }
