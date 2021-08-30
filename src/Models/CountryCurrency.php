@@ -20,14 +20,14 @@ use HaakCo\PostgresHelper\Models\BaseModels\BaseModel;
  */
 class CountryCurrency extends BaseModel
 {
-    protected string $table = 'country_currencies';
+    protected $table = 'country_currencies';
 
-    protected array $casts = [
+    protected $casts = [
         'country_id' => 'int',
         'currency_id' => 'int',
     ];
 
-    protected array $fillable = ['country_id', 'currency_id'];
+    protected $fillable = ['country_id', 'currency_id'];
 
     public function country()
     {

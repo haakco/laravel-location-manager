@@ -19,7 +19,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int $country_id
  * @property string $name
  * @property Country $country
- * @property City[]|Collection $cities_county
+ * @property City[]|Collection $cities
  */
 class County extends BaseModel
 {

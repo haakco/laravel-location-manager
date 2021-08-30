@@ -21,7 +21,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $name
  * @property string $local_name
  * @property Collection|Country[] $countries
- * @property Collection|CountryLanguage[] $country_languages_language
+ * @property Collection|CountryLanguage[] $countryLanguages
  */
 class Language extends BaseModel
 {

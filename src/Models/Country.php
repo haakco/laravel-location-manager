@@ -34,20 +34,20 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property float $longitude_max
  * @property float $longitude_min
  * @property Continent $continent
- * @property Collection|CountryCurrency[] $country_currencies_country
- * @property Collection|CountryExtra[] $country_extras_country
- * @property Collection|County[] $counties_country
+ * @property Collection|CountryCurrency[] $currenciesCountry
+ * @property Collection|CountryExtra[] $countryExtras
+ * @property Collection|County[] $counties
  * @property Collection|Language[] $languages
- * @property Collection|CountryLanguage[] $country_languages_country
+ * @property Collection|CountryLanguage[] $countryLanguages
  * @property Collection|Timezone[] $timezones
- * @property Collection|CountryTimezone[] $country_timezones_country
- * @property City[]|Collection $cities_country
+ * @property Collection|CountryTimezone[] $countryTimezones
+ * @property City[]|Collection $cities
  */
 class Country extends BaseModel
 {
     use SoftDeletes;
 
-    protected string $table = 'countries';
+    protected $table = 'countries';
 
     protected $casts = [
         'continent_id' => 'int',
@@ -61,7 +61,7 @@ class Country extends BaseModel
         'longitude_min' => 'decimal:6',
     ];
 
-    protected array $fillable = [
+    protected $fillable = [
         'continent_id',
         'is_active',
         'iso_code',

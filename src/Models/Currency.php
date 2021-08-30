@@ -25,7 +25,7 @@ use Illuminate\Database\Eloquent\Collection;
  * @property string $minor_symbol
  * @property string $smallest_value_text
  * @property int $decimal_places
- * @property Collection|CountryCurrency[] $country_currencies_currency
+ * @property Collection|CountryCurrency[] $countryCurrencies
  */
 class Currency extends BaseModel
 {

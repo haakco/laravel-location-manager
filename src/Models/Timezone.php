@@ -1,10 +1,8 @@
 <?php
 
-declare(strict_types=1);
+/** @noinspection PhpMissingFieldTypeInspection */
 
-/**
- * Created by Reliese Model.
- */
+declare(strict_types=1);
 
 namespace HaakCo\LocationManager\Models;
 
@@ -29,7 +27,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int $day_light_raw_offset
  * @property int $day_light_raw_offset_minutes
  * @property Collection|Country[] $countries
- * @property Collection|CountryTimezone[] $country_timezones_timezone
+ * @property Collection|CountryTimezone[] $countryTimezones
  */
 class Timezone extends BaseModel
 {

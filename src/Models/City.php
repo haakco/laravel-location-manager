@@ -26,14 +26,14 @@ class City extends BaseModel
 {
     use SoftDeletes;
 
-    protected string $table = 'cities';
+    protected $table = 'cities';
 
     protected $casts = [
         'country_id' => 'int',
         'county_id' => 'int',
     ];
 
-    protected array $fillable = ['country_id', 'county_id', 'name'];
+    protected $fillable = ['country_id', 'county_id', 'name'];
 
     public function country(): BelongsTo|Country
     {

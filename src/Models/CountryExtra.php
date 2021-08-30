@@ -19,13 +19,13 @@ use HaakCo\PostgresHelper\Models\BaseModels\BaseModel;
  */
 class CountryExtra extends BaseModel
 {
-    protected string $table = 'country_extra';
+    protected $table = 'country_extra';
 
-    protected array $casts = [
+    protected $casts = [
         'country_id' => 'int',
     ];
 
-    protected array $fillable = ['country_id', 'json_data'];
+    protected $fillable = ['country_id', 'json_data'];
 
     public function country()
     {

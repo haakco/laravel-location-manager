@@ -18,15 +18,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property Carbon $updated_at
  * @property string $deleted_at
  * @property string $name
- * @property Collection|Country[] $countries_continent
+ * @property Collection|Country[] $countries
  */
 class Continent extends BaseModel
 {
     use SoftDeletes;
 
-    protected string $table = 'continents';
+    protected $table = 'continents';
 
-    protected array $fillable = ['name'];
+    protected $fillable = ['name'];
 
     /**
      * @return HasMany|Country[]
