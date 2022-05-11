@@ -1,12 +1,11 @@
 {
   "name": "haakco/laravel-location-manager",
   "description": ":package_description",
+  "license": "proprietary",
   "keywords": [
     "Laravel",
     "LocationManager"
   ],
-  "homepage": "https://github.com/haakco/laravel-location-manager",
-  "license": "proprietary",
   "authors": [
     {
       "name": "Tim Haak",
@@ -14,32 +13,24 @@
       "homepage": "https://haak.co"
     }
   ],
+  "homepage": "https://github.com/haakco/laravel-location-manager",
   "require": {
     "haakco/laravel-postgres-helper": "@dev",
-    "illuminate/support": "~7 || ~8",
-    "pragmarx/countries": "^0.7"
+    "illuminate/support": "~7 || ~8 || ~9 || ~10",
+    "pragmarx/countries": ">=0.7"
   },
   "require-dev": {
-    "brainmaestro/composer-git-hooks": "^2.8",
-    "ergebnis/composer-normalize": "^2.15",
-    "orchestra/testbench": "~5 || ~6",
-    "phpstan/phpstan": "^0.12.96",
-    "phpstan/phpstan-phpunit": "^0.12.22",
-    "phpunit/phpunit": "~9.0",
-    "psalm/plugin-laravel": "^1.5",
+    "brainmaestro/composer-git-hooks": ">=2.8",
+    "ergebnis/composer-normalize": ">=2.15",
+    "orchestra/testbench": "~5 || ~6 || ~7 || ~8 || ~9 || ~10",
+    "phpunit/phpunit": ">=9.5",
     "roave/security-advisories": "dev-latest",
-    "symplify/easy-coding-standard": "^9.4",
-    "symplify/phpstan-extensions": "^9.4",
-    "vimeo/psalm": "^4.9"
+    "symplify/easy-coding-standard": ">=9.4"
   },
-  "extra": {
-    "laravel": {
-      "aliases": {
-        "LocationManager": "HaakCo\\LocationManager\\Facades\\LocationManager"
-      },
-      "providers": [
-        "HaakCo\\LocationManager\\LocationManagerServiceProvider"
-      ]
+  "repositories": {
+    "haakco/laravel-postgres-helper": {
+      "type": "vcs",
+      "url": "git@github.com:haakco/laravel-postgres-helper.git"
     }
   },
   "autoload": {
@@ -52,10 +43,19 @@
       "HaakCo\\LocationManager\\Tests\\": "tests"
     }
   },
-  "repositories": {
-    "haakco/laravel-postgres-helper": {
-      "type": "vcs",
-      "url": "git@github.com:haakco/laravel-postgres-helper.git"
+  "config": {
+    "allow-plugins": {
+      "ergebnis/composer-normalize": true
+    }
+  },
+  "extra": {
+    "laravel": {
+      "aliases": {
+        "LocationManager": "HaakCo\\LocationManager\\Facades\\LocationManager"
+      },
+      "providers": [
+        "HaakCo\\LocationManager\\LocationManagerServiceProvider"
+      ]
     }
   },
   "scripts": {
