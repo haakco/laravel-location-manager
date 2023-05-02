@@ -1,6 +1,6 @@
 {
   "name": "haakco/laravel-location-manager",
-  "description": ":package_description",
+  "description": "Creates location tables and functions",
   "license": "MIT",
   "keywords": [
     "Laravel",
