@@ -68,25 +68,10 @@
       "Illuminate\\Foundation\\ComposerScripts::postUpdate",
       "composer normalize"
     ],
-    "fix-code-format": [
-      "./vendor/bin/phpcbf || true"
-    ],
-    "phpcs": [
-      "@php vendor/bin/ecs check --no-interaction",
-      "@php vendor/bin/ecs check --fix --no-interaction"
-    ],
-    "phpcs-check": [
-      "@php vendor/bin/ecs check --no-interaction"
-    ],
-    "phpcs-no-cache": [
-      "@php vendor/bin/ecs check --clear-cache --no-interaction",
-      "@php vendor/bin/ecs check --no-interaction",
-      "@php vendor/bin/ecs check --fix --no-interaction"
+    "lint": [
+      "./vendor/bin/pint"
     ],
     "phpstan": "@php vendor/bin/phpstan analyse --no-interaction --memory-limit 1G",
-    "psalm": "@php vendor/bin/psalm --show-info=false",
-    "style-check": [
-      "./vendor/bin/phpcs"
-    ]
+    "psalm": "@php vendor/bin/psalm --show-info=false"
   }
 }
