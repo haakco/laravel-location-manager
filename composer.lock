@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4fdee117d6292675eea48bdc3875b2db",
+    "content-hash": "4ff4a418e9368f1735daeec746fcb518",
     "packages": [
         {
             "name": "brick/math",
@@ -651,40 +651,40 @@
         },
         {
             "name": "haakco/laravel-postgres-helper",
-            "version": "dev-master",
+            "version": "v1.0.3",
             "source": {
                 "type": "git",
-                "url": "git@github.com:haakco/laravel-postgres-helper.git",
-                "reference": "7919f79218e599470fdc97cf09b347e5c750af76"
+                "url": "https://github.com/haakco/laravel-postgres-helper.git",
+                "reference": "9ec122d1733b2dd98802cabb86603bdc08e0657a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/haakco/laravel-postgres-helper/zipball/7919f79218e599470fdc97cf09b347e5c750af76",
-                "reference": "7919f79218e599470fdc97cf09b347e5c750af76",
+                "url": "https://api.github.com/repos/haakco/laravel-postgres-helper/zipball/9ec122d1733b2dd98802cabb86603bdc08e0657a",
+                "reference": "9ec122d1733b2dd98802cabb86603bdc08e0657a",
                 "shasum": ""
             },
             "require": {
-                "illuminate/support": "~7 || ~8 || ~9 || ~10 || ~11 || ~12"
+                "illuminate/support": "~7 || ~8 || ~9 || ~10 || ~11 || ~12",
+                "php": ">=8.0"
             },
             "require-dev": {
                 "brainmaestro/composer-git-hooks": ">=2.8",
                 "doctrine/dbal": ">=3.3",
                 "ergebnis/composer-normalize": ">=2.15",
+                "laravel/pint": "^1.10",
                 "orchestra/testbench": "~5 || ~6 || ~7 || ~8 || ~9 || ~10 || ~11 || ~12",
                 "roave/security-advisories": "dev-latest",
-                "squizlabs/php_codesniffer": ">=3.6",
-                "symplify/easy-coding-standard": ">=10.2"
+                "squizlabs/php_codesniffer": ">=3.6"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
-                "laravel": {
-                    "aliases": {
-                        "PostgresHelper": "HaakCo\\PostgresHelper\\Facades\\PostgresHelper"
-                    },
-                    "providers": [
-                        "HaakCo\\PostgresHelper\\PostgresHelperServiceProvider"
-                    ]
+                "hooks": {
+                    "post-merge": "composer install",
+                    "pre-commit": [
+                        "echo committing as $(git config user.name)",
+                        "./vendor/bin/pint"
+                    ],
+                    "pre-push": []
                 }
             },
             "autoload": {
@@ -692,51 +692,9 @@
                     "HaakCo\\PostgresHelper\\": "src/"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "HaakCo\\PostgresHelper\\Tests\\": "tests"
-                }
-            },
-            "scripts": {
-                "post-install-cmd": [
-                    "Illuminate\\Foundation\\ComposerScripts::postInstall",
-                    "vendor/bin/cghooks add --ignore-lock"
-                ],
-                "post-update-cmd": [
-                    "Illuminate\\Foundation\\ComposerScripts::postUpdate",
-                    "vendor/bin/cghooks update",
-                    "composer normalize"
-                ],
-                "cghooks": [
-                    "vendor/bin/cghooks"
-                ],
-                "fix-code-format": [
-                    "./vendor/bin/phpcbf || true"
-                ],
-                "phpcs": [
-                    "@php vendor/bin/ecs check --no-interaction",
-                    "@php vendor/bin/ecs check --fix --no-interaction"
-                ],
-                "phpcs-check": [
-                    "@php vendor/bin/ecs check --no-interaction"
-                ],
-                "phpcs-no-cache": [
-                    "@php vendor/bin/ecs check --clear-cache --no-interaction",
-                    "@php vendor/bin/ecs check --no-interaction",
-                    "@php vendor/bin/ecs check --fix --no-interaction"
-                ],
-                "phpstan": [
-                    "@php vendor/bin/phpstan analyse --no-interaction --memory-limit 1G"
-                ],
-                "psalm": [
-                    "@php vendor/bin/psalm --show-info=false"
-                ],
-                "style-check": [
-                    "./vendor/bin/phpcs"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "proprietary"
+                "MIT"
             ],
             "authors": [
                 {
@@ -745,17 +703,17 @@
                     "homepage": "https://haak.co"
                 }
             ],
-            "description": ":package_description",
+            "description": "Helper functions for postgres in Laravel",
             "homepage": "https://github.com/haakco/laravel-postgres-helper",
             "keywords": [
-                "Laravel",
-                "PostgresHelper"
+                "PostgresHelper",
+                "laravel"
             ],
             "support": {
-                "source": "https://github.com/haakco/laravel-postgres-helper/tree/v1.0.2",
-                "issues": "https://github.com/haakco/laravel-postgres-helper/issues"
+                "issues": "https://github.com/haakco/laravel-postgres-helper/issues",
+                "source": "https://github.com/haakco/laravel-postgres-helper/tree/v1.0.3"
             },
-            "time": "2023-02-27T20:10:02+00:00"
+            "time": "2023-05-02T10:52:25+00:00"
         },
         {
             "name": "laravel/framework",
@@ -5408,6 +5366,72 @@
             "time": "2022-04-13T08:02:27+00:00"
         },
         {
+            "name": "laravel/pint",
+            "version": "v1.10.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/pint.git",
+                "reference": "c7a01fa9bdd79819e7a2f1ba63ac1b02e6692dbc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/pint/zipball/c7a01fa9bdd79819e7a2f1ba63ac1b02e6692dbc",
+                "reference": "c7a01fa9bdd79819e7a2f1ba63ac1b02e6692dbc",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "ext-tokenizer": "*",
+                "ext-xml": "*",
+                "php": "^8.1.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.16.0",
+                "illuminate/view": "^10.5.1",
+                "laravel-zero/framework": "^10.0.2",
+                "mockery/mockery": "^1.5.1",
+                "nunomaduro/larastan": "^2.5.1",
+                "nunomaduro/termwind": "^1.15.1",
+                "pestphp/pest": "^2.4.0"
+            },
+            "bin": [
+                "builds/pint"
+            ],
+            "type": "project",
+            "autoload": {
+                "psr-4": {
+                    "App\\": "app/",
+                    "Database\\Seeders\\": "database/seeders/",
+                    "Database\\Factories\\": "database/factories/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nuno Maduro",
+                    "email": "enunomaduro@gmail.com"
+                }
+            ],
+            "description": "An opinionated code formatter for PHP.",
+            "homepage": "https://laravel.com",
+            "keywords": [
+                "format",
+                "formatter",
+                "lint",
+                "linter",
+                "php"
+            ],
+            "support": {
+                "issues": "https://github.com/laravel/pint/issues",
+                "source": "https://github.com/laravel/pint"
+            },
+            "time": "2023-04-25T14:52:30+00:00"
+        },
+        {
             "name": "localheinz/diff",
             "version": "1.1.1",
             "source": {
@@ -8541,64 +8565,6 @@
             "time": "2023-04-28T13:25:36+00:00"
         },
         {
-            "name": "symplify/easy-coding-standard",
-            "version": "11.3.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/easy-coding-standard/easy-coding-standard.git",
-                "reference": "d4159e06c0970e71a2a58d350160241e7cb3994b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/easy-coding-standard/easy-coding-standard/zipball/d4159e06c0970e71a2a58d350160241e7cb3994b",
-                "reference": "d4159e06c0970e71a2a58d350160241e7cb3994b",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.2"
-            },
-            "conflict": {
-                "friendsofphp/php-cs-fixer": "<3.0",
-                "squizlabs/php_codesniffer": "<3.6",
-                "symplify/coding-standard": "<11.3"
-            },
-            "bin": [
-                "bin/ecs"
-            ],
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "bootstrap.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Use Coding Standard with 0-knowledge of PHP-CS-Fixer and PHP_CodeSniffer",
-            "keywords": [
-                "Code style",
-                "automation",
-                "fixer",
-                "static analysis"
-            ],
-            "support": {
-                "issues": "https://github.com/easy-coding-standard/easy-coding-standard/issues",
-                "source": "https://github.com/easy-coding-standard/easy-coding-standard/tree/11.3.2"
-            },
-            "funding": [
-                {
-                    "url": "https://www.paypal.me/rectorphp",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/tomasvotruba",
-                    "type": "github"
-                }
-            ],
-            "time": "2023-03-22T15:28:51+00:00"
-        },
-        {
             "name": "theseer/tokenizer",
             "version": "1.2.1",
             "source": {
@@ -8859,14 +8825,13 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "haakco/laravel-postgres-helper": 20,
         "roave/security-advisories": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
-    "platform-dev": {
-        "php": ">=8.2"
+    "platform": {
+        "php": ">=8.0"
     },
+    "platform-dev": [],
     "plugin-api-version": "2.3.0"
 }

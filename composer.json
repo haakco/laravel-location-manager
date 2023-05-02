@@ -1,7 +1,7 @@
 {
   "name": "haakco/laravel-location-manager",
   "description": ":package_description",
-  "license": "proprietary",
+  "license": "MIT",
   "keywords": [
     "Laravel",
     "LocationManager"
@@ -15,22 +15,16 @@
   ],
   "homepage": "https://github.com/haakco/laravel-location-manager",
   "require": {
-    "haakco/laravel-postgres-helper": "@dev",
+    "php": ">=8.0",
+    "haakco/laravel-postgres-helper": "^1.0",
     "illuminate/support": "~10 || ~11 || ~12"
   },
   "require-dev": {
-    "php": ">=8.2",
     "ergebnis/composer-normalize": ">=2.30",
+    "laravel/pint": "^1.10",
     "orchestra/testbench": "~8 || ~9 || ~10 || ~11 || ~12",
     "phpunit/phpunit": ">=10.1",
-    "roave/security-advisories": "dev-latest",
-    "symplify/easy-coding-standard": ">=10.3"
-  },
-  "repositories": {
-    "haakco/laravel-postgres-helper": {
-      "type": "vcs",
-      "url": "git@github.com:haakco/laravel-postgres-helper.git"
-    }
+    "roave/security-advisories": "dev-latest"
   },
   "autoload": {
     "psr-4": {
@@ -48,6 +42,15 @@
     }
   },
   "extra": {
+    "hooks": {
+      "post-merge": "composer install",
+      "pre-commit": [
+        "echo committing as $(git config user.name)",
+        "./vendor/bin/pint",
+        "composer fix-code-format"
+      ],
+      "pre-push": []
+    },
     "laravel": {
       "aliases": {
         "LocationManager": "HaakCo\\LocationManager\\Facades\\LocationManager"
