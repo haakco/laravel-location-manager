@@ -83,9 +83,6 @@ class Country extends BaseModel
         return $this->belongsTo(Continent::class, 'continent_id');
     }
 
-    /**
-     * @return HasMany
-     */
     public function currenciesCountry(): HasMany
     {
         return $this->hasMany(CountryCurrency::class, 'country_id');

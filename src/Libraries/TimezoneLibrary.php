@@ -26,7 +26,7 @@ class TimezoneLibrary
                 ->where('name', $tzName)
                 ->first();
 
-        if (!($timeZone instanceof Timezone)) {
+        if (! ($timeZone instanceof Timezone)) {
             $timeZone = new Timezone();
             $timeZone->name = $tzName;
         }

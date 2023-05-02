@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace HaakCo\LocationManager\Libraries;
 
+use function app_path;
+use function array_key_exists;
 use HaakCo\LocationManager\Models\Currency;
 use Illuminate\Support\Facades\Log;
 use NumberFormatter;
 use PragmaRX\Coollection\Package\Coollection;
 use PragmaRX\Countries\Package\Countries;
-
-use function app_path;
-use function array_key_exists;
 use function strlen;
 
 class CurrencyLibrary
@@ -33,17 +32,16 @@ class CurrencyLibrary
      */
     private function loadIso4217Currencies(): array
     {
-        $xmlObject = simplexml_load_string(file_get_contents(app_path() . $this->iso4217File));
+        $xmlObject = simplexml_load_string(file_get_contents(app_path().$this->iso4217File));
         $result = [];
         foreach ($xmlObject->CcyTbl->children() as $ccyNtry) {
-            $result[(string)$ccyNtry->Ccy] = (array)$ccyNtry;
+            $result[(string) $ccyNtry->Ccy] = (array) $ccyNtry;
         }
 
         return $result;
     }
 
     /** @noinspection PhpUndefinedMethodInspection */
-
     public function getAllCurrencies(): void
     {
         $currencyKeys =
@@ -64,19 +62,19 @@ class CurrencyLibrary
                 ->where('code', $currencyThreeCode)
                 ->first();
 
-        if (!($currency instanceof Currency)) {
+        if (! ($currency instanceof Currency)) {
             /** @var Coollection $currencyData */
             $currencyData = $this->countries->currencies()
-                    ->where('iso.code', $currencyThreeCode)
-                    ->first();
+                ->where('iso.code', $currencyThreeCode)
+                ->first();
 
             $currency = new Currency();
-            if (null === $currencyData || !isset($currencyData->units)) {
+            if (null === $currencyData || ! isset($currencyData->units)) {
                 Log::error("Error: Currency Can't find currency in library trying iso 4217 xml", [
                     'currencyCode' => $currencyThreeCode,
                     'countryCode' => $countryCode,
                 ]);
-                if (true === !array_key_exists($currencyThreeCode, $this->iso4217Currencies)) {
+                if (true === ! array_key_exists($currencyThreeCode, $this->iso4217Currencies)) {
                     Log::error('Error: Currency unknown currency code', [
                         'currencyCode' => $currencyThreeCode,
                         'countryCode' => $countryCode,
@@ -94,7 +92,7 @@ class CurrencyLibrary
                 $currency->full_name = $simpleData['CcyNm'];
                 $currency->minor_name = '';
                 $currency->minor_symbol = '';
-                $currency->smallest_value_text = '0.' . str_pad('', $simpleData['CcyMnrUnts'] - 1, '0');
+                $currency->smallest_value_text = '0.'.str_pad('', $simpleData['CcyMnrUnts'] - 1, '0');
                 $currency->decimal_places = $simpleData['CcyMnrUnts'];
             } else {
                 $currency->symbol = $currencyData->units->major->symbol;
@@ -106,7 +104,7 @@ class CurrencyLibrary
                 $currency->full_name = $currencyData->name;
                 $currency->minor_name = $currencyData->units->minor->name;
                 $currency->minor_symbol = $currencyData->units->minor->symbol;
-                $currency->smallest_value_text = (string)$currencyData->units->minor->majorValue;
+                $currency->smallest_value_text = (string) $currencyData->units->minor->majorValue;
                 $currency->decimal_places = strlen(substr(strrchr($currencyData->units->minor->majorValue, '.'), 1));
             }
         }
@@ -116,14 +114,12 @@ class CurrencyLibrary
     }
 
     /**
-     * @param $currencyCode
-     * @param string $locale
-     *
+     * @param  string  $locale
      * @return false|string
      */
     public function getCurrencySymbol($currencyCode, $locale = 'en_UK'): string
     {
-        $formatter = new NumberFormatter($locale . '@currency=' . $currencyCode, NumberFormatter::CURRENCY);
+        $formatter = new NumberFormatter($locale.'@currency='.$currencyCode, NumberFormatter::CURRENCY);
 
         return $formatter->getSymbol(NumberFormatter::CURRENCY_SYMBOL);
     }

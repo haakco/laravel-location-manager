@@ -35,8 +35,7 @@ class Language extends BaseModel
     {
         return $this->belongsToMany(Country::class, 'country_languages', 'language_id')
             ->withPivot('id')
-            ->withTimestamps()
-        ;
+            ->withTimestamps();
     }
 
     public function country_languages_language()

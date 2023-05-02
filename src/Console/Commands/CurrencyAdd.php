@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace HaakCo\LocationManager\Console\Commands;
 
-use  Exception;
+use Exception;
 use HaakCo\LocationManager\Libraries\CurrencyLibrary;
 use Illuminate\Console\Command;
 

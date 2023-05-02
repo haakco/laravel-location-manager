@@ -58,8 +58,7 @@ class Timezone extends BaseModel
     {
         return $this->belongsToMany(Country::class, 'country_timezones', 'timezone_id')
             ->withPivot('id')
-            ->withTimestamps()
-        ;
+            ->withTimestamps();
     }
 
     public function country_timezones_timezone()

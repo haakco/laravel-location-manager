@@ -69,7 +69,6 @@ class HaakcoLaravelLocationManagerLocation extends Migration
                 ->nullable();
         });
 
-
         Schema::create('currencies', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestampTz('created_at')
@@ -196,9 +195,9 @@ class HaakcoLaravelLocationManagerLocation extends Migration
                 ->onDelete('cascade');
 
             $table->unique([
-                    'country_id',
-                    'timezone_id',
-                ]);
+                'country_id',
+                'timezone_id',
+            ]);
         });
 
         Schema::create('country_languages', function (Blueprint $table) {
@@ -219,9 +218,9 @@ class HaakcoLaravelLocationManagerLocation extends Migration
                 ->onDelete('cascade');
 
             $table->unique([
-                    'country_id',
-                    'language_id',
-                ]);
+                'country_id',
+                'language_id',
+            ]);
         });
 
         Schema::create('country_currencies', function (Blueprint $table) {
@@ -242,9 +241,9 @@ class HaakcoLaravelLocationManagerLocation extends Migration
                 ->onDelete('cascade');
 
             $table->unique([
-                    'country_id',
-                    'currency_id',
-                ]);
+                'country_id',
+                'currency_id',
+            ]);
         });
 
         Schema::create('counties', function (Blueprint $table) {
@@ -265,9 +264,9 @@ class HaakcoLaravelLocationManagerLocation extends Migration
             $table->text('name')
                 ->index();
             $table->unique([
-                    'country_id',
-                    'name',
-                ]);
+                'country_id',
+                'name',
+            ]);
         });
 
         Schema::create('cities', function (Blueprint $table) {
@@ -293,10 +292,10 @@ class HaakcoLaravelLocationManagerLocation extends Migration
                 ->index();
 
             $table->unique([
-                    'country_id',
-                    'county_id',
-                    'name',
-                ]);
+                'country_id',
+                'county_id',
+                'name',
+            ]);
         });
 
         PgHelperLibrary::addMissingUpdatedAtTriggers();
