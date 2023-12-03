@@ -31,7 +31,7 @@ class CurrencyAdd extends Command
      */
     public function handle(CurrencyLibrary $currencyLibrary): int
     {
-        if ('all' === $this->argument('currency_code')) {
+        if ($this->argument('currency_code') === 'all') {
             $currencyLibrary->getAllCurrencies();
         } else {
             $currencyLibrary->getCurrencyFromCode($this->argument('currency_code'));

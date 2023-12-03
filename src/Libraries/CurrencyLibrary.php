@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace HaakCo\LocationManager\Libraries;
 
-use function app_path;
-use function array_key_exists;
 use HaakCo\LocationManager\Models\Currency;
 use Illuminate\Support\Facades\Log;
 use NumberFormatter;
 use PragmaRX\Coollection\Package\Coollection;
 use PragmaRX\Countries\Package\Countries;
+
+use function app_path;
+use function array_key_exists;
 use function strlen;
 
 class CurrencyLibrary
@@ -54,7 +55,7 @@ class CurrencyLibrary
 
     public function getCurrencyFromCode(
         string $currencyThreeCode,
-        ?string $countryCode = null,
+        string $countryCode = null,
         string $locale = 'en'
     ): ?Currency {
         $currency =
@@ -69,12 +70,12 @@ class CurrencyLibrary
                 ->first();
 
             $currency = new Currency();
-            if (null === $currencyData || ! isset($currencyData->units)) {
+            if ($currencyData === null || ! isset($currencyData->units)) {
                 Log::error("Error: Currency Can't find currency in library trying iso 4217 xml", [
                     'currencyCode' => $currencyThreeCode,
                     'countryCode' => $countryCode,
                 ]);
-                if (true === ! array_key_exists($currencyThreeCode, $this->iso4217Currencies)) {
+                if (! array_key_exists($currencyThreeCode, $this->iso4217Currencies) === true) {
                     Log::error('Error: Currency unknown currency code', [
                         'currencyCode' => $currencyThreeCode,
                         'countryCode' => $countryCode,

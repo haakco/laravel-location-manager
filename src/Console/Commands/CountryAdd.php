@@ -28,7 +28,7 @@ class CountryAdd extends Command
      */
     public function handle(CountryLibrary $countryLibrary): int
     {
-        if ('all' === $this->argument('countryCode')) {
+        if ($this->argument('countryCode') === 'all') {
             $countryLibrary->getAllCountries();
         } else {
             $countryLibrary->getCountryFrom2LetterCode($this->argument('countryCode'));

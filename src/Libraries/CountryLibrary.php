@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace HaakCo\LocationManager\Libraries;
 
-use function array_values;
 use HaakCo\LocationManager\Models\Continent;
 use HaakCo\LocationManager\Models\Country;
 use HaakCo\LocationManager\Models\CountryCurrency;
@@ -16,6 +15,8 @@ use HaakCo\LocationManager\Models\Language;
 use Illuminate\Support\Facades\Log;
 use PragmaRX\Countries\Package\Countries;
 use RuntimeException;
+
+use function array_values;
 use function strtoupper;
 
 class CountryLibrary
@@ -58,7 +59,7 @@ class CountryLibrary
             $this->countries->all()
                 ->pluck('cca2');
         foreach ($countryCodes as $countryCode) {
-            if (2 === \strlen($countryCode)) {
+            if (\strlen($countryCode) === 2) {
                 if (isset($this->ignoreCodes[$countryCode])) {
                     Log::error('Error: Country ignoring from ignore list', [
                         'countryCode' => $countryCode,
@@ -77,7 +78,7 @@ class CountryLibrary
 
     public function getCountryFrom2LetterCode(string $countryCode): ?Country
     {
-        if ('EU' === $countryCode) {
+        if ($countryCode === 'EU') {
             Log::error('Error: Eu is not a country', [
                 'countryCode' => $countryCode,
             ]);
@@ -109,12 +110,12 @@ class CountryLibrary
 
             $country = new Country();
             $country->continent_id = $continentId;
-            if ('XK' === (string) $countryInfo->cca2) {
+            if ((string) $countryInfo->cca2 === 'XK') {
                 $ccn3 = 383;
             } else {
                 try {
                     $ccn3 = (int) $countryInfo->ccn3;
-                    if (0 === $ccn3) {
+                    if ($ccn3 === 0) {
                         $ccn3 = null;
                         Log::error('Error: Country has invalid ccn3', [
                             'countryCode' => $countryCode,
@@ -152,7 +153,7 @@ class CountryLibrary
         $country->name = (string) $countryInfo->name['common'];
         if (isset($countryInfo->name['official']) &&
             \is_string($countryInfo->name['official']) &&
-            '' !== $countryInfo->name['official']) {
+            $countryInfo->name['official'] !== '') {
             $officialName = $countryInfo->name['official'];
         } else {
             $officialName = (string) $countryInfo->name['common'];
