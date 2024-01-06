@@ -6,6 +6,8 @@ namespace HaakCo\LocationManager\Models\Enums;
 
 class CountriesEnum
 {
+    public const NONE_ID = 0;
+
     public const ARUBA_ID = 1;
 
     public const ARUBA_NAME = 'Aruba';

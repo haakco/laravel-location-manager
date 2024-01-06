@@ -55,7 +55,7 @@ class CurrencyLibrary
 
     public function getCurrencyFromCode(
         string $currencyThreeCode,
-        string $countryCode = null,
+        ?string $countryCode = null,
         string $locale = 'en'
     ): ?Currency {
         $currency =

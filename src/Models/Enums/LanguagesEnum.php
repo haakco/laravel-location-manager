@@ -6,6 +6,8 @@ namespace HaakCo\LocationManager\Models\Enums;
 
 class LanguagesEnum
 {
+    public const NONE_ID = 0;
+
     public const DUTCH_ID = 1;
 
     public const DUTCH_NAME = 'Dutch';

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace HaakCo\LocationManager\Models;
 
-use Carbon\Carbon;
 use App\Models\BaseModels\BaseModel;
+use Carbon\Carbon;
 
 /**
  * Class CountryLanguage.
