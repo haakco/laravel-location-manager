@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace HaakCo\LocationManager\Models;
 
 use Carbon\Carbon;
-use HaakCo\PostgresHelper\Models\BaseModels\BaseModel;
+use App\Models\BaseModels\BaseModel;
 
 /**
  * Class CountryExtra.

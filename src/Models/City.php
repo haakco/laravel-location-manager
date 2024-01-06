@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace HaakCo\LocationManager\Models;
 
+use App\Models\BaseModels\BaseModel;
 use Carbon\Carbon;
-use HaakCo\PostgresHelper\Models\BaseModels\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
