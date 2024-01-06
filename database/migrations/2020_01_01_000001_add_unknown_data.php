@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 
-class HaakcoLaravelLocationManagerLocationData extends Migration
+class HaakcoLaravelLocationManagerAddUnkownLocations extends Migration
 {
     /**
      * Run the migrations.

@@ -223,16 +223,16 @@
         },
         {
             "name": "haakco/laravel-postgres-helper",
-            "version": "v1.1.0",
+            "version": "v1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/haakco/laravel-postgres-helper.git",
-                "reference": "977d423173190445766c47327b27b894bfb513bd"
+                "reference": "aded67cf3719e0b598559ed0dace5ecaa139793e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/haakco/laravel-postgres-helper/zipball/977d423173190445766c47327b27b894bfb513bd",
-                "reference": "977d423173190445766c47327b27b894bfb513bd",
+                "url": "https://api.github.com/repos/haakco/laravel-postgres-helper/zipball/aded67cf3719e0b598559ed0dace5ecaa139793e",
+                "reference": "aded67cf3719e0b598559ed0dace5ecaa139793e",
                 "shasum": ""
             },
             "require": {
@@ -283,9 +283,9 @@
             ],
             "support": {
                 "issues": "https://github.com/haakco/laravel-postgres-helper/issues",
-                "source": "https://github.com/haakco/laravel-postgres-helper/tree/v1.1.0"
+                "source": "https://github.com/haakco/laravel-postgres-helper/tree/v1.1.1"
             },
-            "time": "2024-01-06T12:19:49+00:00"
+            "time": "2024-01-06T15:32:38+00:00"
         },
         {
             "name": "illuminate/collections",
