@@ -98,3 +98,15 @@ INSERT INTO
 VALUES
   (0, '2024-01-01 00:00:00', '2024-01-01 00:00:00', 0, 0);
 
+INSERT INTO
+  counties
+(id, created_at, updated_at, deleted_at, country_id, name)
+VALUES
+  (0, '2024-01-01 00:00:00', '2024-01-01 00:00:00', NULL, 0, 'Unknown');
+
+INSERT INTO
+  cities
+(id, created_at, updated_at, deleted_at, country_id, county_id, name)
+VALUES
+  (0, '2024-01-01 00:00:00', '2024-01-01 00:00:00', NULL, 0, 0, 'Unknown');
+
