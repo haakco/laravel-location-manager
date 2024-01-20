@@ -32,7 +32,7 @@ VALUES
 
         DB::unprepared(
             file_get_contents(
-                __DIR__ . '/1900_01_01_000200_location_data_01_timezones.sql'
+                __DIR__.'/1900_01_01_000200_location_data_01_timezones.sql'
             )
         );
 
@@ -40,7 +40,7 @@ VALUES
 
         DB::unprepared(
             file_get_contents(
-                __DIR__ . '/1900_01_01_000200_location_data_02_countries.sql'
+                __DIR__.'/1900_01_01_000200_location_data_02_countries.sql'
             )
         );
 
@@ -48,7 +48,7 @@ VALUES
 
         DB::unprepared(
             file_get_contents(
-                __DIR__ . '/1900_01_01_000200_location_data_03_languages.sql'
+                __DIR__.'/1900_01_01_000200_location_data_03_languages.sql'
             )
         );
 
