@@ -16,7 +16,7 @@ use function strlen;
 
 class CurrencyLibrary
 {
-    private string $iso4217File = '/Libraries/Helper/CurrencyData/ISO_4217_2018-08-29.xml';
+    private string $iso4217File = __DIR__.'/CurrencyData/ISO_4217_2018-08-29.xml';
 
     private Countries $countries;
 
