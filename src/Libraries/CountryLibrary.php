@@ -83,7 +83,7 @@ class CountryLibrary
                 'countryCode' => $countryCode,
             ]);
 
-            return null;
+            throw new RuntimeException('Eu is not a country');
         }
         $countryCode = strtoupper($countryCode);
         $country =

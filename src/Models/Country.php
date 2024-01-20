@@ -16,9 +16,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * Class Country.
  *
  * @property int $id
- * @property Carbon $created_at
- * @property Carbon $updated_at
- * @property string $deleted_at
+ * @property datetime $created_at
+ * @property datetime $updated_at
+ * @property datetime $deleted_at
  * @property int $continent_id
  * @property bool $is_active
  * @property string $iso_code
@@ -34,14 +34,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property float $longitude_max
  * @property float $longitude_min
  * @property Continent $continent
+ * @property Collection|City[] $cities
+ * @property Collection|County[]
  * @property Collection|CountryCurrency[] $currenciesCountry
- * @property Collection|CountryExtra[] $countryExtras
- * @property Collection|County[] $counties
+ * @property Collection|CountryExtra[] $countryExtras$counties
  * @property Collection|Language[] $languages
  * @property Collection|CountryLanguage[] $countryLanguages
  * @property Collection|Timezone[] $timezones
  * @property Collection|CountryTimezone[] $countryTimezones
- * @property City[]|Collection $cities
  */
 class Country extends BaseModel
 {
@@ -50,6 +50,9 @@ class Country extends BaseModel
     protected $table = 'countries';
 
     protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+        'deleted_at' => 'datetime',
         'continent_id' => 'int',
         'is_active' => 'boolean',
         'iso_numeric' => 'int',
@@ -81,6 +84,16 @@ class Country extends BaseModel
     public function continent(): BelongsTo|Continent
     {
         return $this->belongsTo(Continent::class, 'continent_id');
+    }
+
+    /**
+     * @return BelongsToMany|Currency[]
+     */
+    public function currencies(): BelongsToMany|array
+    {
+        return $this->belongsToMany(Currency::class, 'country_currencies', 'country_id')
+            ->withPivot('id')
+            ->withTimestamps();
     }
 
     public function currenciesCountry(): HasMany
