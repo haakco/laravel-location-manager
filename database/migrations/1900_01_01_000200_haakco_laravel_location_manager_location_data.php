@@ -15,24 +15,24 @@ class HaakcoLaravelLocationManagerLocationData extends Migration
         PgHelperLibrary::addMissingUpdatedAtTriggers();
 
         DB::insert(
-            "INSERT INTO continents (id, created_at, updated_at, deleted_at, name)
+            "INSERT INTO continents (id, created_at, updated_at, deleted_at, enabled, name)
 VALUES
-(0, '2020-09-16 21:50:42', '2020-09-16 21:50:42', null, 'None'),
-(1, '2020-09-16 21:50:42', '2020-09-16 21:50:42', null, 'Africa'),
-(2, '2020-09-16 21:50:42', '2020-09-16 21:50:42', null, 'Antarctica'),
-(3, '2020-09-16 21:50:42', '2020-09-16 21:50:42', null, 'Australia'),
-(4, '2020-09-16 21:50:42', '2020-09-16 21:50:42', null, 'Asia'),
-(5, '2020-09-16 21:45:16', '2020-09-16 21:45:16', null, 'Europe'),
-(6, '2020-09-16 21:50:42', '2020-09-16 21:50:42', null, 'North America'),
-(7, '2020-09-16 21:50:43', '2020-09-16 21:50:43', null, 'Oceania'),
-(8, '2020-09-16 21:50:43', '2020-09-16 21:50:43', null, 'South America');"
+(0, '2020-09-16 21:50:42', '2020-09-16 21:50:42', null, false,'None'),
+(1, '2020-09-16 21:50:42', '2020-09-16 21:50:42', null, true,'Africa'),
+(2, '2020-09-16 21:50:42', '2020-09-16 21:50:42', null, true, 'Antarctica'),
+(3, '2020-09-16 21:50:42', '2020-09-16 21:50:42', null, true, 'Australia'),
+(4, '2020-09-16 21:50:42', '2020-09-16 21:50:42', null, true, 'Asia'),
+(5, '2020-09-16 21:45:16', '2020-09-16 21:45:16', null, true, 'Europe'),
+(6, '2020-09-16 21:50:42', '2020-09-16 21:50:42', null, true, 'North America'),
+(7, '2020-09-16 21:50:43', '2020-09-16 21:50:43', null, true, 'Oceania'),
+(8, '2020-09-16 21:50:43', '2020-09-16 21:50:43', null, true, 'South America');"
         );
 
         PgHelperLibrary::setSequenceStart('continents');
 
         DB::unprepared(
             file_get_contents(
-                __DIR__.'/2015_07_28_125013_location_data_01_timezones.sql'
+                __DIR__ . '/1900_01_01_000200_location_data_01_timezones.sql'
             )
         );
 
@@ -40,7 +40,7 @@ VALUES
 
         DB::unprepared(
             file_get_contents(
-                __DIR__.'/2015_07_28_125013_location_data_02_countries.sql'
+                __DIR__ . '/1900_01_01_000200_location_data_02_countries.sql'
             )
         );
 
@@ -48,7 +48,7 @@ VALUES
 
         DB::unprepared(
             file_get_contents(
-                __DIR__.'/2015_07_28_125013_location_data_03_languages.sql'
+                __DIR__ . '/1900_01_01_000200_location_data_03_languages.sql'
             )
         );
 
@@ -56,7 +56,7 @@ VALUES
 
         DB::unprepared(
             file_get_contents(
-                __DIR__.'/2015_07_28_125013_location_data_04_currencies.sql'
+                __DIR__.'/1900_01_01_000200_location_data_04_currencies.sql'
             )
         );
 
@@ -64,7 +64,7 @@ VALUES
 
         DB::unprepared(
             file_get_contents(
-                __DIR__.'/2015_07_28_125013_location_data_10_country_timezones.sql'
+                __DIR__.'/1900_01_01_000200_location_data_10_country_timezones.sql'
             )
         );
 
@@ -72,7 +72,7 @@ VALUES
 
         DB::unprepared(
             file_get_contents(
-                __DIR__.'/2015_07_28_125013_location_data_11_country_languages.sql'
+                __DIR__.'/1900_01_01_000200_location_data_11_country_languages.sql'
             )
         );
 
@@ -80,7 +80,7 @@ VALUES
 
         DB::unprepared(
             file_get_contents(
-                __DIR__.'/2015_07_28_125013_location_data_12_country_currencies.sql'
+                __DIR__.'/1900_01_01_000200_location_data_12_country_currencies.sql'
             )
         );
 

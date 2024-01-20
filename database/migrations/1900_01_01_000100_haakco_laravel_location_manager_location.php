@@ -25,6 +25,9 @@ class HaakcoLaravelLocationManagerLocation extends Migration
             $table->timestampTz('deleted_at')
                 ->nullable()
                 ->index();
+            $table->boolean('is_enabled')
+                ->default(true)
+                ->index();
             $table->boolean('is_day_light_saving')
                 ->index();
             $table->text('name')
@@ -57,6 +60,9 @@ class HaakcoLaravelLocationManagerLocation extends Migration
             $table->timestampTz('deleted_at')
                 ->nullable()
                 ->index();
+            $table->boolean('is_enabled')
+                ->default(true)
+                ->index();
             $table->text('code')
                 ->unique()
                 ->nullable();
@@ -76,6 +82,12 @@ class HaakcoLaravelLocationManagerLocation extends Migration
                 ->index();
             $table->timestampTz('updated_at')
                 ->default(DB::raw('CURRENT_TIMESTAMP'))
+                ->index();
+            $table->timestampTz('deleted_at')
+                ->nullable()
+                ->index();
+            $table->boolean('is_enabled')
+                ->default(true)
                 ->index();
             $table->text('symbol')
                 ->index();
@@ -110,6 +122,9 @@ class HaakcoLaravelLocationManagerLocation extends Migration
             $table->timestampTz('deleted_at')
                 ->nullable()
                 ->index();
+            $table->boolean('is_enabled')
+                ->default(true)
+                ->index();
             $table->text('name')
                 ->unique();
         });
@@ -124,6 +139,9 @@ class HaakcoLaravelLocationManagerLocation extends Migration
                 ->index();
             $table->timestampTz('deleted_at')
                 ->nullable()
+                ->index();
+            $table->boolean('is_enabled')
+                ->default(true)
                 ->index();
             $table->foreignId('continent_id')
                 ->index()
@@ -166,8 +184,8 @@ class HaakcoLaravelLocationManagerLocation extends Migration
             $table->timestampTz('created_at')
                 ->default(DB::raw('CURRENT_TIMESTAMP'))
                 ->index();
-            $table->timestampTz('updated_at')
-                ->default(DB::raw('CURRENT_TIMESTAMP'))
+            $table->boolean('is_enabled')
+                ->default(true)
                 ->index();
             $table->foreignId('country_id')
                 ->unique()
@@ -257,6 +275,9 @@ class HaakcoLaravelLocationManagerLocation extends Migration
             $table->timestampTz('deleted_at')
                 ->nullable()
                 ->index();
+            $table->boolean('is_enabled')
+                ->default(true)
+                ->index();
             $table->foreignId('country_id')
                 ->index()
                 ->constrained('countries')
@@ -279,6 +300,9 @@ class HaakcoLaravelLocationManagerLocation extends Migration
                 ->index();
             $table->timestampTz('deleted_at')
                 ->nullable()
+                ->index();
+            $table->boolean('is_enabled')
+                ->default(true)
                 ->index();
             $table->foreignId('country_id')
                 ->index()
