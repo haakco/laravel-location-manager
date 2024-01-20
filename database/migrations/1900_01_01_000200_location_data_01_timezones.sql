@@ -4,8 +4,7 @@ INSERT INTO timezones
   day_light_display_name, day_light_raw_offset, day_light_raw_offset_minutes
   )
 VALUES
-  (0, '2024-01-01 00:00:00', '2024-01-01 00:00:00', null, false, false, 'Unknown', 'Unknown', 0, 0, 'Unknown', 0, 0)
-   (1, '2020-12-07 14:37:25', '2020-12-07 14:37:25', null, true, false, 'Africa/Abidjan', 'Greenwich Mean Time', 0, 0, '', 0, 0),
+  (0, '2024-01-01 00:00:00', '2024-01-01 00:00:00', null, false, false, 'Unknown', 'Unknown', 0, 0, 'Unknown', 0, 0),
    (1, '2020-12-07 14:37:25', '2020-12-07 14:37:25', null, true, false, 'Africa/Abidjan', 'Greenwich Mean Time', 0, 0, '', 0, 0),
    (2, '2020-12-07 14:37:25', '2020-12-07 14:37:25', null, true, false, 'Africa/Accra', 'Greenwich Mean Time', 0, 0, '', 0, 0),
    (3, '2020-12-07 14:37:25', '2020-12-07 14:37:25', null, true, false, 'Africa/Addis_Ababa', 'East Africa Time', 10800000, 180, '', 0, 0),
