@@ -48,6 +48,14 @@ VALUES
 
         DB::unprepared(
             file_get_contents(
+                __DIR__.'/1900_01_01_000200_location_data_02_counties.sql'
+            )
+        );
+
+        PgHelperLibrary::setSequenceStart('counties');
+
+        DB::unprepared(
+            file_get_contents(
                 __DIR__.'/1900_01_01_000200_location_data_03_languages.sql'
             )
         );
