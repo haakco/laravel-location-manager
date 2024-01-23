@@ -18,7 +18,7 @@ class HaakcoLaravelLocationManagerLocationData extends Migration
 
         DB::unprepared(
             file_get_contents(
-                __DIR__.'/1900_01_01_000200_location_data_010_timezones.sql'
+                __DIR__.'/1900_01_01_000200_location_data_010_continents.sql'
             )
         );
 
@@ -48,7 +48,7 @@ class HaakcoLaravelLocationManagerLocationData extends Migration
 
         DB::unprepared(
             file_get_contents(
-                __DIR__.'/1900_01_01_000200_location_data_060_currencies.sql'
+                __DIR__.'/1900_01_01_000200_location_data_050_currencies.sql'
             )
         );
 
