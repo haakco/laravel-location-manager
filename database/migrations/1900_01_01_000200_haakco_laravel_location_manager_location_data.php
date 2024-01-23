@@ -32,7 +32,7 @@ VALUES
 
         DB::unprepared(
             file_get_contents(
-                __DIR__.'/1900_01_01_000200_location_data_01_timezones.sql'
+                __DIR__ . '/1900_01_01_000200_location_data_020_timezones.sql'
             )
         );
 
@@ -40,7 +40,7 @@ VALUES
 
         DB::unprepared(
             file_get_contents(
-                __DIR__.'/1900_01_01_000200_location_data_02_countries.sql'
+                __DIR__ . '/1900_01_01_000200_location_data_030_countries.sql'
             )
         );
 
@@ -48,7 +48,7 @@ VALUES
 
         DB::unprepared(
             file_get_contents(
-                __DIR__.'/1900_01_01_000200_location_data_02_counties.sql'
+                __DIR__ . '/1900_01_01_000200_location_data_200_counties.sql'
             )
         );
 
@@ -56,7 +56,7 @@ VALUES
 
         DB::unprepared(
             file_get_contents(
-                __DIR__.'/1900_01_01_000200_location_data_03_languages.sql'
+                __DIR__ . '/1900_01_01_000200_location_data_040_languages.sql'
             )
         );
 
@@ -64,7 +64,7 @@ VALUES
 
         DB::unprepared(
             file_get_contents(
-                __DIR__.'/1900_01_01_000200_location_data_04_currencies.sql'
+                __DIR__.'/1900_01_01_000200_location_data_060_currencies.sql'
             )
         );
 
@@ -72,7 +72,7 @@ VALUES
 
         DB::unprepared(
             file_get_contents(
-                __DIR__.'/1900_01_01_000200_location_data_10_country_timezones.sql'
+                __DIR__.'/1900_01_01_000200_location_data_100_country_timezones.sql'
             )
         );
 
@@ -80,7 +80,7 @@ VALUES
 
         DB::unprepared(
             file_get_contents(
-                __DIR__.'/1900_01_01_000200_location_data_11_country_languages.sql'
+                __DIR__.'/1900_01_01_000200_location_data_110_country_languages.sql'
             )
         );
 
@@ -88,7 +88,7 @@ VALUES
 
         DB::unprepared(
             file_get_contents(
-                __DIR__.'/1900_01_01_000200_location_data_12_country_currencies.sql'
+                __DIR__.'/1900_01_01_000200_location_data_120_country_currencies.sql'
             )
         );
 
