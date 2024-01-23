@@ -14,25 +14,17 @@ class HaakcoLaravelLocationManagerLocationData extends Migration
     {
         PgHelperLibrary::addMissingUpdatedAtTriggers();
 
-        DB::insert(
-            "INSERT INTO continents (id, created_at, updated_at, deleted_at, enabled, name)
-VALUES
-(0, '2020-09-16 21:50:42', '2020-09-16 21:50:42', null, false,'None'),
-(1, '2020-09-16 21:50:42', '2020-09-16 21:50:42', null, true,'Africa'),
-(2, '2020-09-16 21:50:42', '2020-09-16 21:50:42', null, true, 'Antarctica'),
-(3, '2020-09-16 21:50:42', '2020-09-16 21:50:42', null, true, 'Australia'),
-(4, '2020-09-16 21:50:42', '2020-09-16 21:50:42', null, true, 'Asia'),
-(5, '2020-09-16 21:45:16', '2020-09-16 21:45:16', null, true, 'Europe'),
-(6, '2020-09-16 21:50:42', '2020-09-16 21:50:42', null, true, 'North America'),
-(7, '2020-09-16 21:50:43', '2020-09-16 21:50:43', null, true, 'Oceania'),
-(8, '2020-09-16 21:50:43', '2020-09-16 21:50:43', null, true, 'South America');"
-        );
-
         PgHelperLibrary::setSequenceStart('continents');
 
         DB::unprepared(
             file_get_contents(
-                __DIR__ . '/1900_01_01_000200_location_data_020_timezones.sql'
+                __DIR__.'/1900_01_01_000200_location_data_010_timezones.sql'
+            )
+        );
+
+        DB::unprepared(
+            file_get_contents(
+                __DIR__.'/1900_01_01_000200_location_data_020_timezones.sql'
             )
         );
 
@@ -40,7 +32,7 @@ VALUES
 
         DB::unprepared(
             file_get_contents(
-                __DIR__ . '/1900_01_01_000200_location_data_030_countries.sql'
+                __DIR__.'/1900_01_01_000200_location_data_030_countries.sql'
             )
         );
 
@@ -48,15 +40,7 @@ VALUES
 
         DB::unprepared(
             file_get_contents(
-                __DIR__ . '/1900_01_01_000200_location_data_200_counties.sql'
-            )
-        );
-
-        PgHelperLibrary::setSequenceStart('counties');
-
-        DB::unprepared(
-            file_get_contents(
-                __DIR__ . '/1900_01_01_000200_location_data_040_languages.sql'
+                __DIR__.'/1900_01_01_000200_location_data_040_languages.sql'
             )
         );
 
@@ -89,6 +73,22 @@ VALUES
         DB::unprepared(
             file_get_contents(
                 __DIR__.'/1900_01_01_000200_location_data_120_country_currencies.sql'
+            )
+        );
+
+        PgHelperLibrary::setSequenceStart('country_currencies');
+
+        DB::unprepared(
+            file_get_contents(
+                __DIR__.'/1900_01_01_000200_location_data_200_counties.sql'
+            )
+        );
+
+        PgHelperLibrary::setSequenceStart('counties');
+
+        DB::unprepared(
+            file_get_contents(
+                __DIR__.'/1900_01_01_000200_location_data_210_cities.sql'
             )
         );
 
