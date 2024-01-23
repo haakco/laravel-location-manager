@@ -3,6 +3,7 @@
 use HaakCo\PostgresHelper\Libraries\PgHelperLibrary;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class HaakcoLaravelLocationManagerLocation extends Migration
@@ -16,6 +17,9 @@ class HaakcoLaravelLocationManagerLocation extends Migration
     {
         Schema::create('timezones', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->uuid('uuid')
+                ->default(DB::raw('uuid_generate_v4()'))
+                ->unique();
             $table->timestampTz('created_at')
                 ->default(DB::raw('CURRENT_TIMESTAMP'))
                 ->index();
@@ -51,6 +55,9 @@ class HaakcoLaravelLocationManagerLocation extends Migration
 
         Schema::create('languages', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->uuid('uuid')
+                ->default(DB::raw('uuid_generate_v4()'))
+                ->unique();
             $table->timestampTz('created_at')
                 ->default(DB::raw('CURRENT_TIMESTAMP'))
                 ->index();
@@ -77,6 +84,9 @@ class HaakcoLaravelLocationManagerLocation extends Migration
 
         Schema::create('currencies', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->uuid('uuid')
+                ->default(DB::raw('uuid_generate_v4()'))
+                ->unique();
             $table->timestampTz('created_at')
                 ->default(DB::raw('CURRENT_TIMESTAMP'))
                 ->index();
@@ -113,6 +123,9 @@ class HaakcoLaravelLocationManagerLocation extends Migration
 
         Schema::create('continents', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->uuid('uuid')
+                ->default(DB::raw('uuid_generate_v4()'))
+                ->unique();
             $table->timestampTz('created_at')
                 ->default(DB::raw('CURRENT_TIMESTAMP'))
                 ->index();
@@ -131,6 +144,9 @@ class HaakcoLaravelLocationManagerLocation extends Migration
 
         Schema::create('countries', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->uuid('uuid')
+                ->default(DB::raw('uuid_generate_v4()'))
+                ->unique();
             $table->timestampTz('created_at')
                 ->default(DB::raw('CURRENT_TIMESTAMP'))
                 ->index();
@@ -266,6 +282,9 @@ class HaakcoLaravelLocationManagerLocation extends Migration
 
         Schema::create('counties', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->uuid('uuid')
+                ->default(DB::raw('uuid_generate_v4()'))
+                ->unique();
             $table->timestampTz('created_at')
                 ->default(DB::raw('CURRENT_TIMESTAMP'))
                 ->index();
@@ -292,6 +311,9 @@ class HaakcoLaravelLocationManagerLocation extends Migration
 
         Schema::create('cities', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->uuid('uuid')
+                ->default(DB::raw('uuid_generate_v4()'))
+                ->unique();
             $table->timestampTz('created_at')
                 ->default(DB::raw('CURRENT_TIMESTAMP'))
                 ->index();
