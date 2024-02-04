@@ -33,10 +33,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property float $longitude_max
  * @property float $longitude_min
  * @property Continent $continent
- * @property Collection|City[] $cities
- * @property Collection|County[]
  * @property Collection|CountryCurrency[] $currenciesCountry
- * @property Collection|CountryExtra[] $countryExtras$counties
+ * @property Collection|CountryExtra[] $countryExtras
  * @property Collection|Language[] $languages
  * @property Collection|CountryLanguage[] $countryLanguages
  * @property Collection|Timezone[] $timezones
@@ -109,14 +107,6 @@ class Country extends BaseModel
     }
 
     /**
-     * @return HasMany|County[]
-     */
-    public function counties(): HasMany|array
-    {
-        return $this->hasMany(County::class, 'country_id');
-    }
-
-    /**
      * @return BelongsToMany|Language[]
      */
     public function languages(): BelongsToMany|array
@@ -150,13 +140,5 @@ class Country extends BaseModel
     public function countryTimezones(): HasMany|array
     {
         return $this->hasMany(CountryTimezone::class, 'country_id');
-    }
-
-    /**
-     * @return HasMany|City[]
-     */
-    public function cities(): HasMany|array
-    {
-        return $this->hasMany(City::class, 'country_id');
     }
 }

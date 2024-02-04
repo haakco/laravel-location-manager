@@ -279,72 +279,7 @@ class HaakcoLaravelLocationManagerLocation extends Migration
                 'currency_id',
             ]);
         });
-
-        Schema::create('counties', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->uuid('uuid')
-                ->default(DB::raw('uuid_generate_v4()'))
-                ->unique();
-            $table->timestampTz('created_at')
-                ->default(DB::raw('CURRENT_TIMESTAMP'))
-                ->index();
-            $table->timestampTz('updated_at')
-                ->default(DB::raw('CURRENT_TIMESTAMP'))
-                ->index();
-            $table->timestampTz('deleted_at')
-                ->nullable()
-                ->index();
-            $table->boolean('enabled')
-                ->default(true)
-                ->index();
-            $table->foreignId('country_id')
-                ->index()
-                ->constrained('countries')
-                ->onDelete('cascade');
-            $table->text('name')
-                ->index();
-            $table->unique([
-                'country_id',
-                'name',
-            ]);
-        });
-
-        Schema::create('cities', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->uuid('uuid')
-                ->default(DB::raw('uuid_generate_v4()'))
-                ->unique();
-            $table->timestampTz('created_at')
-                ->default(DB::raw('CURRENT_TIMESTAMP'))
-                ->index();
-            $table->timestampTz('updated_at')
-                ->default(DB::raw('CURRENT_TIMESTAMP'))
-                ->index();
-            $table->timestampTz('deleted_at')
-                ->nullable()
-                ->index();
-            $table->boolean('enabled')
-                ->default(true)
-                ->index();
-            $table->foreignId('country_id')
-                ->index()
-                ->constrained('countries')
-                ->onDelete('cascade');
-            $table->foreignId('county_id')
-                ->index()
-                ->constrained('counties')
-                ->onDelete('cascade');
-            $table->text('name')
-                ->index();
-
-            $table->unique([
-                'country_id',
-                'county_id',
-                'name',
-            ]);
-        });
-
-        PgHelperLibrary::addMissingUpdatedAtTriggers();
+        PgHelperLibrary::fixAll();
     }
 
     /**
@@ -354,8 +289,6 @@ class HaakcoLaravelLocationManagerLocation extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cities');
-        Schema::dropIfExists('counties');
         Schema::dropIfExists('country_currencies');
         Schema::dropIfExists('country_languages');
         Schema::dropIfExists('country_timezones');

@@ -12,10 +12,6 @@ class HaakcoLaravelLocationManagerLocationData extends Migration
      */
     public function up()
     {
-        PgHelperLibrary::addMissingUpdatedAtTriggers();
-
-        PgHelperLibrary::setSequenceStart('continents');
-
         DB::unprepared(
             file_get_contents(
                 __DIR__.'/1900_01_01_000200_location_data_010_continents.sql'
@@ -28,15 +24,11 @@ class HaakcoLaravelLocationManagerLocationData extends Migration
             )
         );
 
-        PgHelperLibrary::setSequenceStart('timezones');
-
         DB::unprepared(
             file_get_contents(
                 __DIR__.'/1900_01_01_000200_location_data_030_countries.sql'
             )
         );
-
-        PgHelperLibrary::setSequenceStart('countries');
 
         DB::unprepared(
             file_get_contents(
@@ -44,15 +36,11 @@ class HaakcoLaravelLocationManagerLocationData extends Migration
             )
         );
 
-        PgHelperLibrary::setSequenceStart('languages');
-
         DB::unprepared(
             file_get_contents(
                 __DIR__.'/1900_01_01_000200_location_data_050_currencies.sql'
             )
         );
-
-        PgHelperLibrary::setSequenceStart('currencies');
 
         DB::unprepared(
             file_get_contents(
@@ -60,15 +48,11 @@ class HaakcoLaravelLocationManagerLocationData extends Migration
             )
         );
 
-        PgHelperLibrary::setSequenceStart('country_timezones');
-
         DB::unprepared(
             file_get_contents(
                 __DIR__.'/1900_01_01_000200_location_data_110_country_languages.sql'
             )
         );
-
-        PgHelperLibrary::setSequenceStart('country_languages');
 
         DB::unprepared(
             file_get_contents(
@@ -76,23 +60,7 @@ class HaakcoLaravelLocationManagerLocationData extends Migration
             )
         );
 
-        PgHelperLibrary::setSequenceStart('country_currencies');
-
-        DB::unprepared(
-            file_get_contents(
-                __DIR__.'/1900_01_01_000200_location_data_200_counties.sql'
-            )
-        );
-
-        PgHelperLibrary::setSequenceStart('counties');
-
-        DB::unprepared(
-            file_get_contents(
-                __DIR__.'/1900_01_01_000200_location_data_210_cities.sql'
-            )
-        );
-
-        PgHelperLibrary::setSequenceStart('country_currencies');
+        PgHelperLibrary::fixAll();
     }
 
     /**
