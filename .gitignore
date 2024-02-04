@@ -94,6 +94,8 @@ $RECYCLE.BIN/
 /profiler/
 /scripts/logs
 
+composer.lock
+
 #/storage/*.key
 !.gitignore
 !.gitkeep
