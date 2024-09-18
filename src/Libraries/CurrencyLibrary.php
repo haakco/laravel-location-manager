@@ -24,7 +24,7 @@ class CurrencyLibrary
 
     public function __construct()
     {
-        $this->countries = new Countries();
+        $this->countries = new Countries;
         $this->iso4217Currencies = $this->loadIso4217Currencies();
     }
 
@@ -69,7 +69,7 @@ class CurrencyLibrary
                 ->where('iso.code', $currencyThreeCode)
                 ->first();
 
-            $currency = new Currency();
+            $currency = new Currency;
             if ($currencyData === null || ! isset($currencyData->units)) {
                 Log::error("Error: Currency Can't find currency in library trying iso 4217 xml", [
                     'currencyCode' => $currencyThreeCode,

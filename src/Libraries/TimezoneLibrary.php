@@ -27,7 +27,7 @@ class TimezoneLibrary
                 ->first();
 
         if (! ($timeZone instanceof Timezone)) {
-            $timeZone = new Timezone();
+            $timeZone = new Timezone;
             $timeZone->name = $tzName;
         }
         $tz = IntlTimeZone::createTimeZone($tzName);

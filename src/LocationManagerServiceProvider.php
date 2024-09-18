@@ -36,7 +36,7 @@ class LocationManagerServiceProvider extends ServiceProvider
 
         // Register the service the package provides.
         $this->app->singleton('locationmanager', function ($app) {
-            return new LocationManager();
+            return new LocationManager;
         });
     }
 

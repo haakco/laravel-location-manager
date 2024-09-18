@@ -15,7 +15,7 @@
   ],
   "homepage": "https://github.com/haakco/laravel-location-manager",
   "require": {
-    "php": ">=8.0",
+    "php": ">=8",
     "haakco/laravel-postgres-helper": ">=3",
     "illuminate/database": ">=8",
     "illuminate/support": ">=8",
@@ -24,10 +24,10 @@
   "require-dev": {
     "barryvdh/laravel-ide-helper": ">=2",
     "brainmaestro/composer-git-hooks": ">=3",
-    "doctrine/dbal": ">=3",
+    "doctrine/dbal": ">=4",
     "ergebnis/composer-normalize": ">=2",
     "laravel/pint": ">=1",
-    "phpunit/phpunit": ">=10",
+    "phpunit/phpunit": ">=11",
     "roave/security-advisories": "dev-latest"
   },
   "repositories": [

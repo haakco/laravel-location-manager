@@ -47,9 +47,9 @@ class CountryLibrary
 
     public function __construct()
     {
-        $this->currencyLibrary = new CurrencyLibrary();
-        $this->timezoneLibrary = new TimezoneLibrary();
-        $this->countries = new Countries();
+        $this->currencyLibrary = new CurrencyLibrary;
+        $this->timezoneLibrary = new TimezoneLibrary;
+        $this->countries = new Countries;
     }
 
     public function getAllCountries(): void
@@ -108,7 +108,7 @@ class CountryLibrary
                 ]);
             }
 
-            $country = new Country();
+            $country = new Country;
             $country->continent_id = $continentId;
             if ((string) $countryInfo->cca2 === 'XK') {
                 $ccn3 = 383;
@@ -237,7 +237,7 @@ class CountryLibrary
                 ->first();
 
         if (! ($continent instanceof Continent)) {
-            $continent = new Continent();
+            $continent = new Continent;
             $continent->name = $name;
             $continent->save();
         }
@@ -252,7 +252,7 @@ class CountryLibrary
                 ->where('three_letter_code', $threeCode)
                 ->first();
         if (! $language instanceof Language) {
-            $language = new Language();
+            $language = new Language;
             $language->name = $name;
             $language->three_letter_code = $threeCode;
             $language->save();

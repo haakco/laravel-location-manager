@@ -9,6 +9,4 @@ use HaakCo\PostgresHelper\Models\BaseModels\BaseModel as PostgresHelperBaseModel
 /**
  * @mixin IdeHelperBaseModel
  */
-class BaseModel extends PostgresHelperBaseModel
-{
-}
+class BaseModel extends PostgresHelperBaseModel {}
