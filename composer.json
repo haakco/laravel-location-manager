@@ -16,7 +16,7 @@
   "homepage": "https://github.com/haakco/laravel-location-manager",
   "require": {
     "php": ">=8.0",
-    "haakco/laravel-postgres-helper": "^3",
+    "haakco/laravel-postgres-helper": ">=3",
     "illuminate/database": ">=8",
     "illuminate/support": ">=8",
     "pragmarx/countries": "dev-master"
