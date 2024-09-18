@@ -13,7 +13,7 @@ use HaakCo\LocationManager\Models\Currency;
 use HaakCo\LocationManager\Models\Enums\ContinentsEnum;
 use HaakCo\LocationManager\Models\Language;
 use Illuminate\Support\Facades\Log;
-use PragmaRX\Countries\Package\Countries;
+//use PragmaRX\Countries\Package\Countries;
 use RuntimeException;
 
 use function array_values;
@@ -25,7 +25,7 @@ class CountryLibrary
 
     private TimezoneLibrary $timezoneLibrary;
 
-    private Countries $countries;
+//    private Countries $countries;
 
     private array $ignoreCodes = [
         'EU' => 'Europe Union',
@@ -49,31 +49,31 @@ class CountryLibrary
     {
         $this->currencyLibrary = new CurrencyLibrary;
         $this->timezoneLibrary = new TimezoneLibrary;
-        $this->countries = new Countries;
+//        $this->countries = new Countries;
     }
 
     public function getAllCountries(): void
     {
-        /** @noinspection PhpUndefinedMethodInspection */
-        $countryCodes =
-            $this->countries->all()
-                ->pluck('cca2');
-        foreach ($countryCodes as $countryCode) {
-            if (\strlen($countryCode) === 2) {
-                if (isset($this->ignoreCodes[$countryCode])) {
-                    Log::error('Error: Country ignoring from ignore list', [
-                        'countryCode' => $countryCode,
-                        'name' => $this->ignoreCodes[$countryCode],
-                    ]);
-                } else {
-                    $this->getCountryFrom2LetterCode($countryCode);
-                }
-            } else {
-                Log::error('Error: Country ignoring all none 2 letter codes', [
-                    'countryCode' => $countryCode,
-                ]);
-            }
-        }
+//        /** @noinspection PhpUndefinedMethodInspection */
+//        $countryCodes =
+//            $this->countries->all()
+//                ->pluck('cca2');
+//        foreach ($countryCodes as $countryCode) {
+//            if (\strlen($countryCode) === 2) {
+//                if (isset($this->ignoreCodes[$countryCode])) {
+//                    Log::error('Error: Country ignoring from ignore list', [
+//                        'countryCode' => $countryCode,
+//                        'name' => $this->ignoreCodes[$countryCode],
+//                    ]);
+//                } else {
+//                    $this->getCountryFrom2LetterCode($countryCode);
+//                }
+//            } else {
+//                Log::error('Error: Country ignoring all none 2 letter codes', [
+//                    'countryCode' => $countryCode,
+//                ]);
+//            }
+//        }
     }
 
     public function getCountryFrom2LetterCode(string $countryCode): ?Country
@@ -90,23 +90,24 @@ class CountryLibrary
             Country::query()
                 ->where('iso_code', $countryCode)
                 ->first();
-
-        /** @noinspection PhpUndefinedMethodInspection */
-        $countryInfo =
-            $this->countries->where('cca2', $countryCode)
-                ->first();
         if (! ($country instanceof Country)) {
             $continentId = ContinentsEnum::NONE_ID;
-            if (isset($countryInfo->geo['continent']) && \is_array($countryInfo->geo['continent'])) {
-                $continent = $this->getContinent(array_values($countryInfo->geo['continent'])[0]);
-                if ($continent instanceof Continent) {
-                    $continentId = $continent->id;
-                }
-            } else {
-                Log::error('Error: Country has no continents', [
-                    'countryCode' => $countryCode,
-                ]);
-            }
+
+
+//            /** @noinspection PhpUndefinedMethodInspection */
+//            $countryInfo =
+//                $this->countries->where('cca2', $countryCode)
+//                    ->first();
+//            if (isset($countryInfo->geo['continent']) && \is_array($countryInfo->geo['continent'])) {
+//                $continent = $this->getContinent(array_values($countryInfo->geo['continent'])[0]);
+//                if ($continent instanceof Continent) {
+//                    $continentId = $continent->id;
+//                }
+//            } else {
+//                Log::error('Error: Country has no continents', [
+//                    'countryCode' => $countryCode,
+//                ]);
+//            }
 
             $country = new Country;
             $country->continent_id = $continentId;

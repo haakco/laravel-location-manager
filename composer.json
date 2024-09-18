@@ -18,8 +18,7 @@
     "php": ">=8",
     "haakco/laravel-postgres-helper": ">=3",
     "illuminate/database": ">=8",
-    "illuminate/support": ">=8",
-    "pragmarx/countries": "dev-master"
+    "illuminate/support": ">=8"
   },
   "require-dev": {
     "barryvdh/laravel-ide-helper": ">=2",
@@ -30,13 +29,6 @@
     "phpunit/phpunit": ">=11",
     "roave/security-advisories": "dev-latest"
   },
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/haakco/countries.git",
-      "name": "pragmarx/countries"
-    }
-  ],
   "minimum-stability": "dev",
   "prefer-stable": true,
   "autoload": {
